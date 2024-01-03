@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Cart\Cart;
+use App\Models\DiscountCode;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -33,6 +34,14 @@ class PaymentController extends Controller
 //        });
         $totalPrice = Cart::totalPrice();
 
+        //validate discount code add calculate total price
+        $discountCodeId = null;
+        if (!is_null($request->discount_code_value)){
+            //extract code from DB
+            $discountCodeId = DiscountCode::where('code',$request->discount_code_value)->first()->id;
+            $discountCodePercent = DiscountCode::where('code',$request->discount_code_value)->first()->percent;
+            $totalPrice = $totalPrice - ($totalPrice * $discountCodePercent/100);
+        }
 
         $order = $request->user()->orders()->create([
             'price'=>$totalPrice,
@@ -44,6 +53,7 @@ class PaymentController extends Controller
             'receiver_postal_code'=>$request->receiver_postal_code,
             'receiver_address'=>$request->receiver_address,
             'delivery_type'=>$request->delivery_type,
+            'discount_code_id'=>$discountCodeId,
         ]);
 
         $products = $cardItems->mapWithKeys(function ($item){

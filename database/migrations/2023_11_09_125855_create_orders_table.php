@@ -27,7 +27,7 @@ class CreateOrdersTable extends Migration
             $table->text('receiver_address')->nullable();
             $table->enum('delivery_type',['in_post','in_person']);
             $table->text('tracking_code')->nullable();
-            $table->unsignedBigInteger('discount_code_id');
+            $table->unsignedBigInteger('discount_code_id')->nullable();
             $table->foreign('discount_code_id')->references('code')->on('discount_codes')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();

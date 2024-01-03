@@ -225,17 +225,15 @@
                                 <div class="col-sm-12 d-flex align-items-center justify-content-center mt-1"  id="justify-center">
 {{--                                    <button type="submit" class="btn btn-warning d-block " id=""  style="min-width: 199px" name="" onclick="$('#msform').submit()"> <i class="feather icon-check-circle" ></i> پرداخت </button>--}}
                                     <div class="d-flex flex-row align-items-center justify-content-start w-100">
-                                        <div>
-                                            <form action="" method="get">
-                                                <div class="input-group input-group-sm m-1 my-2 " style="width: 350px;border: 1px solid #bd8f03;border-radius: 6px;">
+                                        <div class="input-group input-group-sm m-1 my-2 " style="width: 350px;border: 1px solid #bd8f03;border-radius: 6px;">
                                                     <input type="text" name="discount-code" id="discount-code" value="" class="form-control float-right " style="border: none;font-size: 11px;width: auto;margin-top: 10px;" placeholder="ثبت کد تخفیف">
+                                                    <input type="hidden" name="discount_code_value" id="discount-code-value" value="">
+
                                                     <div class="input-group-append">
                                                         <div   class="btn btn-default" id="discount-code-button" onclick="submitDiscountCode()" style="color: #bd8f03;margin-top: 10px;"><i class="feather icon-check-circle"></i>ثبت کد </div>
                                                         <div  class="btn btn-default d-none" id="discount-code-message" style="color: #bd8f03;margin-top: 10px;font-size: 12px"><i class="feather icon-check-circle"></i>کد تخفیف با موفقیت اعمال شد</div>
                                                     </div>
                                                 </div>
-                                            </form>
-                                        </div>
                                     </div>
                                 </div>
 
@@ -632,6 +630,7 @@
                             $('#successMessage').removeClass("left-zero",1000, "easeInOutQuad");
                         },9900);
                         $('#discount-code').attr('disabled', 'disabled')
+                        $('#discount-code-value').val(response.code)
                         $('#discount-code-button').addClass('d-none')
                         $('#discount-code-message').removeClass('d-none')
                     }else{
@@ -709,11 +708,9 @@
                 },
                 fail : function(response) {
                     // location.reload();
-
                 }
             });
         }
-
     }
 </script>
 </html>
