@@ -16,7 +16,7 @@ class DiscountCodeController extends Controller
 
     public function store(Request $request){
         $validated_data = \Illuminate\Support\Facades\Validator::make($request->all(),[
-            'code'=>'required|min:2|max:6',
+            'code'=>'required|min:3|max:10',
             'percent'=>'required|numeric|max:99|min:1',
         ]);
 

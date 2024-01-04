@@ -52,12 +52,15 @@
                 </thead>
                 <tbody>
                 @foreach($codes as $code)
-                    <td>{{$code->code}}</td>
-                    <td>{{jdate($code->sale_date)->format('y-m-d')}}</td>
-                    <td>{{$code->percent}}</td>
-                    <td>
-                        <button href="" data-toggle="modal" data-target="#removeModal{{$code->id}}" class="btn btn-danger"> <i class="feather icon-trash"></i>  </button>
-                    </td>
+                    <tr>
+                        <td>{{$code->code}}</td>
+                        <td>{{jdate($code->sale_date)->format('y-m-d')}}</td>
+                        <td>{{$code->percent}}</td>
+                        <td>
+                            <button href="" data-toggle="modal" data-target="#removeModal{{$code->id}}" class="btn btn-danger"> <i class="feather icon-trash"></i>  </button>
+                        </td>
+                    </tr>
+
                     <div class="modal fade " id="removeModal{{$code->id}}" tabindex="-1" role="dialog" aria-labelledby="removeModal{{$code->id}}" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
                             <div class="modal-content" style=" position: absolute;top: 30px;direction: rtl">
@@ -80,7 +83,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <div class="d-flex w-100 align-items-center justify-content-around">
-                                        <form action="{{route('admin.discount-code.destroy',$code->code)}}" method="post">
+                                        <form action="{{route('admin.discount-code.destroy',$code->id)}}" method="post">
                                             @csrf
                                             <button class="btn btn-success"> <i class="feather icon-check-circle"></i> بله </button>
                                             @method('DELETE')

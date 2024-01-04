@@ -76,3 +76,4 @@ Route::delete('/discount-code/{code}/destroy',[App\Http\Controllers\Admin\Discou
 Route::get('/news/index',[App\Http\Controllers\Admin\NewsController::class,'index'])->name('news.index');
 Route::post('/news/store',[App\Http\Controllers\Admin\NewsController::class,'store'])->name('news.store');
 Route::delete('/news/{code}/destroy',[App\Http\Controllers\Admin\NewsController::class,'destroy'])->name('news.destroy');
+
