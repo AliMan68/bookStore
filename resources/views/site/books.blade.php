@@ -43,7 +43,6 @@
                                 </label>
                             @endforeach
                         </div>
-
                     </div>
                     <div class="filter-box" style="">
                         <div class="filter-box-title">

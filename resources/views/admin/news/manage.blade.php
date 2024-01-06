@@ -13,29 +13,36 @@
         <div class="card-content table-responsive d-block">
             <form class="form new-book" method="post" action="">
                 <div style="direction: rtl" class="row">
-                    <div class="col-md-9 col-sm-12">
+                    <div class="col-md-12 col-sm-12">
                         <div class="form-group">
                             <label for="name">*عنوان خبر :</label>
                             <input type="text" id="name" class="form-control required" name="name" value="" placeholder="مثلا راه‌اندازی سامانه انتشارات دانشگاه" required>
                         </div>
                     </div>
-                    <div class="col-md-3 col-sm-12">
+                    <div class="col-md-6 col-sm-12">
                         <div class="form-group">
                             <label for="siteLogo" style="font-size: 11px">تصویر خبر(ترجیحا مستطیل شکل باشد) :</label>
-                            <input type="file" id="siteLogo" class="form-control " name="" >
+                            <input type="file" id="siteLogo" class="form-control " name="image" >
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label for="siteLogo" style="font-size: 11px">پیوست خبر :</label>
+                            <input type="file" id="siteLogo" class="form-control " name="attachment" >
                         </div>
                     </div>
                     {{--                                <div class="divider"></div>--}}
                     <div class="col-md-12 col-sm-12">
                         <div class="form-group">
                             <label for="editor2">*محتوای خبر :</label>
-                            <textarea name="" id="editor2" rows="4" required></textarea>
+                            <textarea name="description" id="editor2" rows="4" required></textarea>
                         </div>
                     </div>
                     <div class="col-md-3 m-auto col-sm-12">
                         <div class="form-group">
                             <button href="" class="btn btn-warning" id="" style="min-width: 150px;border-radius: 15px"  type="submit">
-                                <i class="feather icon-check-circle"></i> ثبت اطلاعات
+                                <i class="feather icon-check-circle"></i> ثبت خبر
                             </button>
                         </div>
                     </div>

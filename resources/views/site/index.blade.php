@@ -136,7 +136,7 @@
                 <section id="component-swiper-centered-slides">
                     <div class="card bg-transparent shadow-none" style="border:none ">
                         <div class="card-header  text-right d-flex align-items-center justify-content-between w-100" style="border-bottom: none">
-                            <a href="{{url('/books')}}" class="">
+                            <a href="{{url('/books/index')}}" class="">
                                 <h4 class="card-title see-all">  مشاهده همه <i class="feather icon-arrow-left-circle"></i></h4>
                             </a>
                             <h5 class="see-sections" style="font-size: 22px" id="categories">  دسته‌بندی‌ها <span style="font-size: 10px">(تعداد)</span> <i class="feather icon-list"></i></h5>

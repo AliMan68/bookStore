@@ -185,8 +185,9 @@
                 </div>
             </a>
         </div>
-        <div class="dashboard-box">
-            <a href="{{url('/admin-manage-news')}}">
+        <div class="dashboard-box {{isActive(['admin.news.index'], 'dashboard-bg-active')}}">
+            <div class="{{isActive(['admin.news.index'], 'active')}}"></div>
+            <a href="{{route('admin.news.index')}}">
                 <div class="dashboard-box-title">
                     <i class="feather icon-info"></i>
                     اخبار و اطلاعیه‌ها
