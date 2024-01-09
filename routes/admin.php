@@ -75,7 +75,7 @@ Route::delete('/discount-code/{code}/destroy',[App\Http\Controllers\Admin\Discou
 //manage news
 Route::get('/news/index',[App\Http\Controllers\Admin\NewsController::class,'index'])->name('news.index');
 Route::post('/news/store',[App\Http\Controllers\Admin\NewsController::class,'store'])->name('news.store');
-//Route::get('/news/edit',[App\Http\Controllers\Admin\NewsController::class,'edit'])->name('news.edit');
-//Route::post('/news/update',[App\Http\Controllers\Admin\NewsController::class,'update'])->name('news.update');
-//Route::delete('/news/{code}/destroy',[App\Http\Controllers\Admin\NewsController::class,'destroy'])->name('news.destroy');
+
+Route::post('/news/{news}/update',[App\Http\Controllers\Admin\NewsController::class,'update'])->name('news.update');
+Route::delete('/news/{news}/destroy',[App\Http\Controllers\Admin\NewsController::class,'destroy'])->name('news.destroy');
 

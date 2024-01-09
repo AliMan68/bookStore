@@ -47,36 +47,25 @@
                         <div class="overlay-gradient t50">
                             <div class="blog-slider">
                                 <div class="blog-slider__wrp swiper-wrapper">
+                                    @foreach($news as $news)
                                     <div class="blog-slider__item swiper-slide">
-                                        <div class="blog-slider__img d-none">
-                                            <img src="" alt="">
+
+                                        <div class="blog-slider__img d-block d-md-none">
+                                            <img src="{{asset($news->image)}}" alt="">
                                         </div>
                                         <div class="blog-slider__content">
-                                            <span class="blog-slider__code d-none d-md-block ">در مهر ماه سال ۱۴۰۰</span>
-                                            <div class="blog-slider__title">راه‌اندازی پورتال انتشارات دانشگاه صنعتی </div>
-                                            <div class="blog-slider__text d-none d-md-block">درخشش دانشجوی رشته مهندسی کامپیوتر دانشکده فناوری اطلاعات و مهندسی کامپیوتر دانشگاه شهید مدنی آذربایجان نوزدهمین مسابقات ملی مهارت</div>
-                                            <a href="#" class="blog-slider__button">اطلاعات بیشتر</a>
+                                            <span class="blog-slider__code d-none d-md-block ">در {{jdate($news->created_at)->format('%d %B %Y')}}</span>
+                                            <div class="blog-slider__title">{{$news->title}}</div>
+{{--                                            <div class="blog-slider__text d-none d-md-block" >{{$news->description}}</div>--}}
+                                            <div class="blog-slider__text d-none d-md-block" >{{strlen($news->description) > 50 ? mb_substr($news->description,0,70,'utf-8')."..." : $news->description}}</div>
+
+                                            <a href="{{route('news.details',$news)}}" class="blog-slider__button">اطلاعات بیشتر</a>
                                         </div>
                                         <div class="blog-slider__img d-none d-md-block">
-                                            <img src="" alt="">
+                                            <img src="{{asset($news->image)}}" alt="">
                                         </div>
                                     </div>
-                                    <div class="blog-slider__item swiper-slide">
-                                        <div class="blog-slider__img d-none">
-
-                                            <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759872/kuldar-kalvik-799168-unsplash.webp" alt="">
-                                        </div>
-                                        <div class="blog-slider__content">
-                                            <span class="blog-slider__code d-none d-md-block ">در مهر ماه سال ۱۳۹۹</span>
-                                            <div class="blog-slider__title">راه‌اندازی پورتال </div>
-                                            <div class="blog-slider__text d-none d-md-block">درخشش دانشجوی رشته مهندسی کامپیوتر دانشکده فناوری اطلاعات و مهندسی کامپیوتر دانشگاه شهید مدنی آذربایجان نوزدهمین مسابقات ملی مهارت</div>
-                                            <a href="#" class="blog-slider__button">اطلاعات بیشتر</a>
-                                        </div>
-                                        <div class="blog-slider__img d-none d-md-block">
-
-                                            <img src="" alt="">
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                                 <div class="blog-slider__pagination"></div>
                             </div>

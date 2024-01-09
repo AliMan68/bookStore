@@ -70,3 +70,5 @@ Route::get('/auth/logout',function (){
     return redirect(route('index'));
 })->name('auth.logout');
 
+Route::get('/news/{news}/details',[App\Http\Controllers\Admin\NewsController::class,'show'])->name('news.details');
+Route::get('/news',[App\Http\Controllers\Admin\NewsController::class,'allNews'])->name('news.index');
