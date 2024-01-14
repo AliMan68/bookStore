@@ -72,10 +72,15 @@ Route::post('report',[App\Http\Controllers\OrderController::class,'report'])->na
 Route::get('/discount-code/index',[App\Http\Controllers\Admin\DiscountCodeController::class,'index'])->name('discount-code.index');
 Route::post('/discount-code/store',[App\Http\Controllers\Admin\DiscountCodeController::class,'store'])->name('discount-code.store');
 Route::delete('/discount-code/{code}/destroy',[App\Http\Controllers\Admin\DiscountCodeController::class,'destroy'])->name('discount-code.destroy');
+
+
 //manage news
 Route::get('/news/index',[App\Http\Controllers\Admin\NewsController::class,'index'])->name('news.index');
 Route::post('/news/store',[App\Http\Controllers\Admin\NewsController::class,'store'])->name('news.store');
-
 Route::post('/news/{news}/update',[App\Http\Controllers\Admin\NewsController::class,'update'])->name('news.update');
 Route::delete('/news/{news}/destroy',[App\Http\Controllers\Admin\NewsController::class,'destroy'])->name('news.destroy');
+
+//Settings
+Route::get('/setting/index',[App\Http\Controllers\Admin\SettingController::class,'index'])->name('setting.index');
+Route::post('/setting/store',[App\Http\Controllers\Admin\SettingController::class,'store'])->name('setting.store');
 

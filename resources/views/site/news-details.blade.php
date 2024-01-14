@@ -10,11 +10,14 @@
     <div class="row mt-2" style="direction: rtl">
         <div class="col-md-8 col-sm-12 m-auto">
             <div class="row" style="border-bottom: 1px solid rgba(12,40,100,0.63);" id="newsCard">
-                <div class="col-12 p-0 py-1 ">
-                    <div class="d-flex align-items-center justify-content-center w-100">
-                        <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759872/kuldar-kalvik-799168-unsplash.webp" id="newsImage" class="mt-sm-4 mt-md-1 handleNewImageResponsive" alt="عنوان خبر قرار بگیرد">
+                @if(strlen($news->image)>1)
+                    <div class="col-12 p-0 py-1 ">
+                        <div class="d-flex align-items-center justify-content-center w-100">
+                            <img src="{{asset($news->image)}}" id="newsImage" class="mt-sm-4 mt-md-1 handleNewImageResponsive" alt="{{$news->title}}">
+                        </div>
                     </div>
-                </div>
+                @endif
+
                 <div class="col-md-12 col-sm-12 pr-0">
                     <div class="d-flex flex-md-column w-100 align-items-center">
                         <div class="d-flex flex-column w-100 justify-content-start">
@@ -25,9 +28,15 @@
                                 {{$news->description}}
 
                             </p>
-                            <div class="d-flex w-100 align-items-center justify-content-between">
-                                <p class="mt-1">{{jdate($news->created_at)->format('%A, %d %B %y')}}</p>
+                            <div class="d-flex align-items-center justify-content-between w-100">
+                                <div class="d-flex w-100 align-items-center justify-content-between">
+                                    <p class="mt-1">{{jdate($news->created_at)->format('%A, %d %B %y')}}</p>
+                                </div>
+                                @if(strlen($news->attachment) > 1)
+                                    <a href="{{asset($news->attachment)}}" download class="news__button" style="font-size: 12px!important;"> <i class="feather icon-download"></i> پیوست </a>
+                                @endif
                             </div>
+
                         </div>
                     </div>
                 </div>

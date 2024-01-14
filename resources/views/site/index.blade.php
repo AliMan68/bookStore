@@ -36,9 +36,7 @@
 
 </head>
 <body class="" >
-<div id="wrapper" class="horizontal-layout horizontal-menu content-detached-left-sidebar ecommerce-application navbar-floating footer-static " data-open="hover" data-menu="horizontal-menu" data-col="2-columns" style="min-height: 900px;
-  background: rgba(0, 0, 0, 0) linear-gradient(155deg, rgba(8, 46, 198, 0.15) 4%, rgba(200, 150, 0, 0.18) 96%) repeat scroll 0% 0% / cover;
-  padding-bottom: 100px !important;">
+<div id="wrapper" class="horizontal-layout horizontal-menu content-detached-left-sidebar ecommerce-application navbar-floating footer-static " data-open="hover" data-menu="horizontal-menu" data-col="2-columns" style="min-height: 900px;background: rgba(0, 0, 0, 0) linear-gradient(155deg, rgba(8, 46, 198, 0.15) 4%, rgba(200, 150, 0, 0.18) 96%) repeat scroll 0% 0% / cover;">
     @include('site.layouts.navbar')
     <div class="no-bottom no-top" id="content" style="font-family: IranYekan!important;">
                 <div class="position-relative" id="slider-section" >

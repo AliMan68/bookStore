@@ -17,26 +17,29 @@
             </div>
             <div class="d-flex justify-content-center mt-2 col-12">
                 <p style="font-size: 22px;color: #ffffff;text-align: center;line-height: 1.6">
-                    خیابان آزادی، دانشگاه صنعتی شریف، مؤسسه انتشارات علمی  <i class="feather icon-map-pin"></i>
+                    {{\App\Models\Setting::latest()->first()->address ?? ''}}  <i class="feather icon-map-pin"></i>
                 </p>
             </div>
 
             <div class="d-flex justify-content-center mt-2 col-12">
                 <p style="font-size: 18px;color: #ffffff;text-align: center;line-height: 1.6">
-                    کارشناس انتشارات : ۳۴۴۰۲۷۷۸-۰۲۱  <i class="feather icon-phone"></i>
+                    کارشناس انتشارات : {{\App\Models\Setting::latest()->first()->phone ?? ''}}  <i class="feather icon-phone"></i>
                 </p>
             </div>
-            <div class="d-flex justify-content-center mt-2 col-12">
-                <p style="font-size: 18px;color: #ffffff;text-align: center;line-height: 1.6">
-                    bookInfo@sharif.ir  <i class="feather icon-mail"></i>
-                </p>
-            </div>
+            @if(!is_null(\App\Models\Setting::latest()->first()->email ?? ''))
+                <div class="d-flex justify-content-center mt-2 col-12">
+                    <p style="font-size: 18px;color: #ffffff;text-align: center;line-height: 1.6">
+                        {{\App\Models\Setting::latest()->first()->email ?? ''}}  <i class="feather icon-mail"></i>
+                    </p>
+                </div>
+            @endif
+
         </div>
     </div>
     <div class="row py-1 pt-2" style="border-top:1px solid #1bb9d2">
         <div class="d-flex flex-row-reverse align-items-center  w-100 mr-5">
             <p style="font-size: 12px;color: #ffffff;text-align: center;line-height: 1.6">
-                .تمامی حقوق مادی و معنوی این سامانه متعلق به انتشارات دانشگاه صنعتی شریف است
+                .تمامی حقوق مادی و معنوی این سامانه متعلق به {{\App\Models\Setting::latest()->first()->system_name ?? ''}} است
                 <i class="feather icon-info"></i>
             </p>
 

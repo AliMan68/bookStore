@@ -1,7 +1,7 @@
 @extends('admin.master')
 
 @section('page-header')
-    {{$headerTitle ?? 'سامانه انتشارات'}}
+    {{$title ?? 'سامانه انتشارات'}}
 @endsection
 
 
