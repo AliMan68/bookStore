@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7add686d5e7a9208aff36905e0afcc3d",
+    "content-hash": "827e8a9a1bb6fe6406a7eee344109cba",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -128,6 +128,69 @@
                 "source": "https://github.com/beberlei/assert/tree/v3.3.2"
             },
             "time": "2021-12-16T21:41:27+00:00"
+        },
+        {
+            "name": "bonecms/laravel-captcha",
+            "version": "v2.2.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/igoshev/laravel-captcha.git",
+                "reference": "37558b42ac1bf3a6c708f638442a784530898f37"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/igoshev/laravel-captcha/zipball/37558b42ac1bf3a6c708f638442a784530898f37",
+                "reference": "37558b42ac1bf3a6c708f638442a784530898f37",
+                "shasum": ""
+            },
+            "require": {
+                "ext-gd": "*",
+                "illuminate/config": "^5.5|^6.0|^7.0|^8.0|^9.0",
+                "illuminate/http": "^5.5|^6.0|^7.0|^8.0|^9.0",
+                "illuminate/routing": "^5.5|^6.0|^7.0|^8.0|^9.0",
+                "illuminate/session": "^5.5|^6.0|^7.0|^8.0|^9.0",
+                "illuminate/support": "^5.5|^6.0|^7.0|^8.0|^9.0",
+                "illuminate/translation": "^5.5|^6.0|^7.0|^8.0|^9.0",
+                "illuminate/view": "^5.5|^6.0|^7.0|^8.0|^9.0",
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Igoshev\\Captcha\\Providers\\CaptchaServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Igoshev\\Captcha\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dmitriy Igoshev",
+                    "email": "dmitry.igo@gmail.com"
+                }
+            ],
+            "description": "Captcha integration for Laravel",
+            "homepage": "https://github.com/igoshev/laravel-captcha",
+            "keywords": [
+                "Laravel Captcha",
+                "captcha"
+            ],
+            "support": {
+                "issues": "https://github.com/igoshev/laravel-captcha/issues",
+                "source": "https://github.com/igoshev/laravel-captcha"
+            },
+            "time": "2022-02-21T19:44:02+00:00"
         },
         {
             "name": "brick/math",
@@ -7710,7 +7773,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.3|^8.0"
+        "php": "^7.3.1|^8.0"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"

@@ -203,16 +203,15 @@
                 </div>
             </a>
         </div>
-
-        <div class="dashboard-box">
-            <a href="{{url('/admin-info')}}">
+        <div class="dashboard-box {{isActive(['admin.profile.index'], 'dashboard-bg-active')}}">
+            <div class="{{isActive(['admin.profile.index'], 'active')}}"></div>
+            <a href="{{route('admin.profile.index')}}">
                 <div class="dashboard-box-title">
                     <i class="feather icon-user"></i>
                     اطلاعات کاربری
                 </div>
             </a>
         </div>
-
         <div class="dashboard-box" style="">
             {{--                        <div class="active"></div>--}}
 

@@ -84,3 +84,8 @@ Route::delete('/news/{news}/destroy',[App\Http\Controllers\Admin\NewsController:
 Route::get('/setting/index',[App\Http\Controllers\Admin\SettingController::class,'index'])->name('setting.index');
 Route::post('/setting/store',[App\Http\Controllers\Admin\SettingController::class,'store'])->name('setting.store');
 
+
+//Profile
+Route::get('/profile/index',[App\Http\Controllers\Auth\RegisterController::class,'editProfile'])->name('profile.index');
+Route::post('/profile/{user}/update',[App\Http\Controllers\Auth\RegisterController::class,'update'])->name('profile.update');
+

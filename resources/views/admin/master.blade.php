@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{\App\Models\Setting::latest()->first()->system_name ?? ''}} - @yield('page-header')  </title>
+    <title>@yield('page-header') - {{\App\Models\Setting::latest()->first()->system_name ?? ''}}  </title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->

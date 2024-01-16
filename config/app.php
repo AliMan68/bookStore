@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Helpers\Cart\CartServiceProvider::class,
 
+
     ],
 
     /*
@@ -230,6 +231,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Cart' => App\Helpers\Cart\Cart::class,
+
 
 
 
