@@ -47,7 +47,6 @@
                                 <div class="blog-slider__wrp swiper-wrapper">
                                     @foreach($news as $news)
                                     <div class="blog-slider__item swiper-slide">
-
                                         <div class="blog-slider__img d-block d-md-none">
                                             <img src="{{asset($news->image)}}" alt="">
                                         </div>
@@ -82,12 +81,12 @@
                     <div class="col-md-10 col-sm-12" style="background: rgb(49, 58, 78) none repeat scroll 0% 0% / cover" >
                         <div id="carouselContent" class="carousel slide" data-ride="carousel" style="height: 40px;padding-top: 10px">
                             <div class="carousel-inner" role="listbox" style="">
-                                <div class="carousel-item   text-center text-white active ">
-                                    <a href="" class="text-white" target="_blank">راه‌اندازی فروشگاه انتشارات دانشگاه شریف</a>
-                                </div>
-                                <div class="carousel-item text-center text-white ">
-                                    <a href="" class="text-white"  target="_blank">اطلاعیه مهم درباره سفارشات بازه ۱۴۰۱/۱۲/۲۹</a>
-                                </div>
+    {{--                                @foreach($news as $news)--}}
+    {{--                                    <div class="carousel-item text-center text-white active ">--}}
+    {{--                                        <a href="{{route('news.details',$news)}}" class="text-white" target="_blank">{{strlen($news->title) > 50 ? mb_substr($news->title,0,70,'utf-8')."..." : $news->title}}</a>--}}
+    {{--                                    </div>--}}
+    {{--                                @endforeach--}}
+
                             </div>
                             <a class="carousel-control-prev" href="#carouselContent" role="button" data-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -106,10 +105,11 @@
                 <section id="subheader" class="py-md-2" data-bgimage="url(images/background/5.png) bottom" style="min-height: calc(13vh)">
                     <div class="row">
                         <div class="col-md-10 col-sm-12 m-auto">
-                            <form action="">
+                            <form method="get" action="{{route('nav.search')}}">
+                                @csrf
                                 <div class="wrapSearch my-md-4">
                                     <div class="search">
-                                        <input type="text" class="searchTerm" placeholder="عنوان کتاب یا نام نویسنده را وارد نمایید">
+                                        <input type="text" name="title" class="searchTerm" placeholder="عنوان کتاب را وارد نمایید">
                                         <button type="submit" class="searchButton">
                                             <i class="fa fa-search"></i>
                                         </button>

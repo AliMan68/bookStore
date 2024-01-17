@@ -90,7 +90,7 @@ return [
     | Spacing between letters in pixels.
     |
     */
-    'letterSpacing' => 4,
+    'letterSpacing' => 7,
 
     /*
     |--------------------------------------------------------------------------
@@ -99,7 +99,7 @@ return [
     | You can specify an array or integer.
     |
     */
-    'length' => [4, 5],
+    'length' => [4,5],
 
     /*
     |--------------------------------------------------------------------------
@@ -108,7 +108,7 @@ return [
     | Enter the different characters.
     |
     */
-    'chars' => 'QSFHTRPAJKLMZXCVBNabdefhxktyzj23456789',
+    'chars' => 'ABZ123456789',
 
     /*
     |--------------------------------------------------------------------------
@@ -119,8 +119,8 @@ return [
     |
     |
     */
-    'width'  => 180,
-    'height' => 50,
+    'width'  => 150,
+    'height' => 40,
 
     /*
     |--------------------------------------------------------------------------
@@ -147,7 +147,7 @@ return [
     | The number of scratches displayed in the Captcha.
     |
     */
-    'scratches' => [1, 6],
+    'scratches' => [0,2],
 
     /*
     |--------------------------------------------------------------------------

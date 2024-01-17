@@ -21,8 +21,8 @@ class DiscountCodeController extends Controller
         ]);
 
         if ($validated_data->fails()) {
+//            dd($validated_data->errors());
             return back()->with('fail',$validated_data->errors());
-            return response(['status' => 'error','message'=>'کد تخفیف/درصد وار شده مجاز نیست']);
         }
         $code = DiscountCode::where('code',$request->code)->first();
         if ($code == null){

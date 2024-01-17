@@ -149,8 +149,6 @@
             <form class="form" method="get" action="{{route('nav.search')}}">
                 @csrf
                 <div class="modal-body " id="">
-
-
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
@@ -159,9 +157,8 @@
                             </div>
                         </div>
                     </div>
-
-            </div>
-            <div class="modal-footer d-flex flex-row align-items-center justify-content-center w-100">
+                 </div>
+                <div class="modal-footer d-flex flex-row align-items-center justify-content-center w-100">
                 <button type="submit" href="" class="btn btn-warning" id="" style="min-width: 150px">
                     <i class="feather icon-search"></i> جستجو
                 </button>

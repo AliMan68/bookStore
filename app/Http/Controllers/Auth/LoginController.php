@@ -26,38 +26,51 @@ class LoginController extends Controller
         elseif (preg_match($phonePattern,$request->username)){
             $usernameType = 'phone';
         }else{
-            $usernameType = 'invalid';;
+            $usernameType = 'invalid';
         }
 
-        //validate password after check username type
-        $request->validate([
-            'password'=>['required', 'string', 'min:8']
+        $validated_captcha = \Illuminate\Support\Facades\Validator::make($request->all(),[
+            'captcha' => 'required|captcha'
         ]);
 
+        if ($validated_captcha->fails()) {
+            return back()->with('fail','کد کپجا وارد شده صحیح نیست');
+        }
 
 
         switch ($usernameType){
             case 'email':
-               //login with email
-                $request->validate([
+                $validated_data = \Illuminate\Support\Facades\Validator::make($request->all(),[
                     'username'=>['required','string']
                 ]);
 
+                if ($validated_data->fails()) {
+                    return back()->with('fail',$validated_data->errors());
+                }
+
                 //try to login user
                 if (auth()->attempt(array('email'=>$request->username,'password'=>$request->password)))
-                    return redirect()->intended('books/index');
+                    return redirect()->intended('/');
                 else
-                    return redirect()->back()->with('fail','خطایی در ورود رخ داده است');
+                    return redirect()->back()->with('fail','نام کاربری یا ایمیل صحیح نیست');
                 break;
             case 'phone':
-                $request->validate([
+
+                $validated_data = \Illuminate\Support\Facades\Validator::make($request->all(),[
                     'username'=>['required','string']
                 ]);
+
+                if ($validated_data->fails()) {
+                    return back()->with('fail',$validated_data->errors());
+                }
                 //login with phone
-                    return 'username type is : '. $usernameType;
+                if (auth()->attempt(array('phone'=>$request->username,'password'=>$request->password)))
+                    return redirect()->intended('/');
+                else
+                    return redirect()->back()->with('fail','نام کاربری یا ایمیل صحیح نیست');
                 break;
             default:
-                 return back();
+                return redirect()->back()->with('fail','فرمت شماره همراه یا ایمیل صحیح نیست');
         }
     }
 }

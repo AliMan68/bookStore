@@ -30,7 +30,13 @@ class RegisterController extends Controller
         if ($validated_data->fails()) {
             return back()->with('fail',$validated_data->errors());
         }
+        $validated_captcha = \Illuminate\Support\Facades\Validator::make($request->all(),[
+            'captcha' => 'required|captcha'
+        ]);
 
+        if ($validated_captcha->fails()) {
+            return back()->with('fail','کد کپجا وارد شده صحیح نیست');
+        }
 
         User::create([
             'name'=>$request->name,

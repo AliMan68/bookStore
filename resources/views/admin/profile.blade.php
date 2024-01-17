@@ -11,7 +11,7 @@
             <p class="m-0" style="margin-bottom: 0!important;">درج آیتم‌های ستاره‌دار اجباری است.</p>
         </li>
         <li>
-            <p class="m-0" style="margin-bottom: 0!important;">در صورتی که قسد بروزرسانی رمز عبور را ندارید،ورودی را خالی بگذارید.</p>
+            <p class="m-0" style="margin-bottom: 0!important;">در صورتی که قصد بروزرسانی رمز عبور را ندارید،ورودی را خالی بگذارید.</p>
         </li>
     </ul>
     <div class="card" style="text-align: right;">
