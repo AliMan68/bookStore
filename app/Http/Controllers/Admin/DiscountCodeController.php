@@ -14,8 +14,9 @@ class DiscountCodeController extends Controller
 
     public function __construct()
     {
-        $this->middleware('can:manage-discount-codes');
+        $this->middleware('can:manage-discount-codes')->except('checkCode');
         $this->middleware('can:manage-discount-store')->only('store');
+        $this->middleware('can:check-discount-code')->only('checkCode');
         $this->middleware('can:manage-discount-destroy')->only('destroy');
 
     }
