@@ -5,13 +5,27 @@
                 <div id="set-padding" class="d-flex align-items-center justify-content-between w-100">
                     <div class="d-none d-md-block">
                         <div class="" style="min-width: 180px">
+
                             @auth
-                                <a href="{{url('admin/orders?type=completed&search=')}}">
-                                    <button class="btn btn-info nav-login-btn" style="font-weight: 500;font-size: 0.88rem;!important;">
-                                        پنل کابری
-                                        <i class="feather icon-user" style=""></i>
-                                    </button>
-                                </a>
+
+                                @if(auth()->user()->is_admin != 1 )
+                                    @if(auth()->user()->roles()->get()->first()->title == 'کاربر' )
+                                        <a href="{{route('admin.user.orders')}}">
+                                            <button class="btn btn-info nav-login-btn" style="font-weight: 500;font-size: 0.88rem;!important;">
+                                                پنل کابری
+                                                <i class="feather icon-user" style=""></i>
+                                            </button>
+                                        </a>
+                                    @endif
+                                @else
+                                    <a href="{{url('admin/orders?type=completed&search=')}}">
+                                        <button class="btn btn-info nav-login-btn" style="font-weight: 500;font-size: 0.88rem;!important;">
+                                            پنل کابری
+                                            <i class="feather icon-user" style=""></i>
+                                        </button>
+                                    </a>
+                                @endif
+
                             @endauth
                             @guest
                                     <a href="{{route('auth.login')}}">

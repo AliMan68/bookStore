@@ -61,9 +61,12 @@ Route::middleware('auth')->group(function (){
     Route::get('/checkoutList',[App\Http\Controllers\CartController::class,'checkoutList'])->name('cart.checkoutList');
     Route::post('/payment/create',[App\Http\Controllers\PaymentController::class,'payment'])->name('payment.create');
     Route::post('/payment/callback',[App\Http\Controllers\PaymentController::class,'callback'])->name('payment.callback');
-    Route::get('/successfullPayment',[App\Http\Controllers\CartController::class,'checkoutList']);
     Route::post('/discount-code/submit',[App\Http\Controllers\Admin\DiscountCodeController::class,'checkCode'])->name('cart.checkDiscountCode');
 
+});
+Route::get('/success',function (){
+    $verify = "اطلاعات پرداخت ";
+    return view('site.successful-payment',compact('verify'));
 });
 Route::get('/auth/logout',function (){
     auth()->logout();

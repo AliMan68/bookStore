@@ -16,6 +16,16 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+//        $this->middleware('can:manage-books',['only' => ['index','create','store','edit','update','destroy']]);
+        $this->middleware('can:manage-books');
+        $this->middleware('can:manage-translators');
+        $this->middleware('can:manage-writers');
+        $this->middleware('can:manage-categories');
+    }
+
     public function index()
     {
         $books = Book::all();

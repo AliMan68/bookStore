@@ -29,7 +29,20 @@
                             <td>
                                 {{jdate($order->created_at)->format('%d %B %Y')}}
                             </td>
-                            <td style="font-size: 12px">{{($order->status == 'delivered') ? 'تحویل شد' : 'در انتظار تحویل/ارسال'}}</td>
+                            <td style="font-size: 12px">
+                                @if($order->status == 'delivered')
+                                    تحویل شد
+                                @elseif($order->status == 'completed')
+                                در انتظار تحویل/ارسال
+                                @elseif($order->status == 'canceled')
+                                لغو شده
+                                @elseif($order->status == 'else')
+                                نامشخص
+                                @elseif($order->status == 'unpaid')
+                                پرداخت نشده
+                                @endif
+
+                            </td>
                             <td>
                                 <button  data-toggle="modal" data-target="#orderDetails{{$order->id}}" class="btn btn-warning btn-sm" style="font-size: 10px!important;"> <i class="feather icon-eye"></i> مشاهده </button>
                             </td>

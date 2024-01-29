@@ -20,14 +20,11 @@
     <link rel="stylesheet" type="text/css" href="{{asset('site-css/magnific-popup.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('site-css/jquery.countdown.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('site-css/style.css')}}">
-
     <link rel="stylesheet" type="text/css" href="{{asset('site-css/select/select2.css')}}" >
     <link rel="stylesheet" type="text/css" href="{{asset('site-css/vendors-rtl.min.css')}}" >
     <link rel="stylesheet" type="text/css" href="{{asset('site-css/persian-datepicker.min.css')}}" >
     <link rel="stylesheet" type="text/css" href="{{asset('site-css/jquery.dataTables.min.css')}}" >
     <link rel="stylesheet" type="text/css" href="{{asset('site-css/buttons.dataTables.min.css')}}" >
-
-
     <!-- color scheme -->
     <link id="colors" href="{{asset('site-css/colors/scheme-01.css')}}" rel="stylesheet" type="text/css" >
     <link rel="stylesheet" type="text/css" href="{{asset('site-css/coloring.css')}}" />

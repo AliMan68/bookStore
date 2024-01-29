@@ -3,12 +3,19 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:manage-profile')->only(['editProfile','update']);
+    }
+
     public function showRegisterForm(){
         return view('auth.new-register');
     }
@@ -30,21 +37,30 @@ class RegisterController extends Controller
         if ($validated_data->fails()) {
             return back()->with('fail',$validated_data->errors());
         }
-        $validated_captcha = \Illuminate\Support\Facades\Validator::make($request->all(),[
-            'captcha' => 'required|captcha'
-        ]);
+//        $validated_captcha = \Illuminate\Support\Facades\Validator::make($request->all(),[
+//            'captcha' => 'required|captcha'
+//        ]);
 
-        if ($validated_captcha->fails()) {
-            return back()->with('fail','کد کپجا وارد شده صحیح نیست');
+//        if ($validated_captcha->fails()) {
+//            return back()->with('fail','کد کپجا وارد شده صحیح نیست');
+//        }
+
+        try {
+            $user = User::create([
+                'name'=>$request->name,
+                'phone'=>$request->phone,
+                'email'=>$request->email,
+                'is_staff'=>1,
+                'password'=>Hash::make($request->password),
+            ]);
+            $role = Role::whereTitle('کاربر')->get()->first();
+//            dd($role->id);
+            $user->roles()->attach($role->id);
+            return redirect(route('auth.login'))->with('success','ثبت نام با موفقیت انجام شد');
+        }catch (\Exception $e){
+            return back()->with('failed','خطایی در ثبت نام رخ داده است');
         }
 
-        User::create([
-            'name'=>$request->name,
-            'phone'=>$request->phone,
-            'email'=>$request->email,
-            'is_staff'=>1,
-            'password'=>Hash::make($request->password),
-        ]);
         return redirect(route('auth.login'));
     }
 

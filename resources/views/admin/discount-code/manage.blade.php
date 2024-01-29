@@ -17,6 +17,7 @@
 
     <div class="card p-2" style="text-align: right;direction: rtl">
         <div class="card-content table-responsive d-block">
+            @can('manage-discount-store')
             <form class="form mb-5" method="post" action="{{route('admin.discount-code.store')}}">
                 @csrf
                 <div style="direction: rtl" class="row px-2 pt-3">
@@ -39,6 +40,7 @@
                     </div>
                 </div>
             </form>
+            @endcan
             @if($codes->count() > 0)
             <h5>کدهای تخفیف</h5>
             <table class="table  table-hover-animation table-striped mb-0 w-100 mt-5" style="direction: rtl" id="table">
@@ -56,9 +58,12 @@
                         <td>{{$code->code}}</td>
                         <td>{{jdate($code->sale_date)->format('y-m-d')}}</td>
                         <td>{{$code->percent}}</td>
-                        <td>
-                            <button href="" data-toggle="modal" data-target="#removeModal{{$code->id}}" class="btn btn-danger"> <i class="feather icon-trash"></i>  </button>
-                        </td>
+                        @can('manage-discount-destroy')
+                            <td>
+                                <button href="" data-toggle="modal" data-target="#removeModal{{$code->id}}" class="btn btn-danger"> <i class="feather icon-trash"></i>  </button>
+                            </td>
+                        @endcan
+
                     </tr>
 
                     <div class="modal fade " id="removeModal{{$code->id}}" tabindex="-1" role="dialog" aria-labelledby="removeModal{{$code->id}}" aria-hidden="true">

@@ -29,13 +29,13 @@ class LoginController extends Controller
             $usernameType = 'invalid';
         }
 
-        $validated_captcha = \Illuminate\Support\Facades\Validator::make($request->all(),[
-            'captcha' => 'required|captcha'
-        ]);
-
-        if ($validated_captcha->fails()) {
-            return back()->with('fail','کد کپجا وارد شده صحیح نیست');
-        }
+//        $validated_captcha = \Illuminate\Support\Facades\Validator::make($request->all(),[
+//            'captcha' => 'required|captcha'
+//        ]);
+//
+//        if ($validated_captcha->fails()) {
+//            return back()->with('fail','کد کپجا وارد شده صحیح نیست');
+//        }
 
 
         switch ($usernameType){
@@ -43,11 +43,9 @@ class LoginController extends Controller
                 $validated_data = \Illuminate\Support\Facades\Validator::make($request->all(),[
                     'username'=>['required','string']
                 ]);
-
                 if ($validated_data->fails()) {
                     return back()->with('fail',$validated_data->errors());
                 }
-
                 //try to login user
                 if (auth()->attempt(array('email'=>$request->username,'password'=>$request->password)))
                     return redirect()->intended('/');

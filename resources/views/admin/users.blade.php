@@ -57,14 +57,13 @@
                                             @can('edit-user')
                                                 <a href="{{route('admin.users.edit',$user->id)}}" class="btn btn-sm btn-warning ">ویرایش</a>
                                             @endcan
-                                            @can('delete-user')
-                                                <form action="{{route('admin.users.destroy',$user->id)}}" method="post">
-                                                    @csrf
-                                                    @method('DELETE')
-
-                                                    <button class="btn btn-sm btn-danger mx-1">حذف</button>
-                                                </form>
-                                            @endcan
+{{--                                            @can('delete-user')--}}
+{{--                                                <form action="{{route('admin.users.destroy',$user->id)}}" method="post">--}}
+{{--                                                    @csrf--}}
+{{--                                                    @method('DELETE')--}}
+{{--                                                    <button class="btn btn-sm btn-danger mx-1">حذف</button>--}}
+{{--                                                </form>--}}
+{{--                                            @endcan--}}
                                             @can('manage-user-permissions')
                                                     <a href="{{route('admin.users.permissions.create',$user->id)}}" class="btn btn-sm btn-success ">دسترسی‌ها</a>
                                             @endcan

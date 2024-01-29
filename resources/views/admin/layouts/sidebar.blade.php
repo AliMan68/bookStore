@@ -37,9 +37,10 @@
     </div>
     <div class="d-flex align-items-center justify-content-between p-1 mx-1">
         <h6 class="pr-1 mt-2 mr-1" style="font-size: 12px;font-weight: 500"><span style="color: gray;font-size: 12px"><i class="feather icon-user"></i> داشبورد </span>{{auth()->user()->name}}</h6>
-        <h6 class="pr-1 mt-2 mr-1" style="font-size: 12px;font-weight: 500"><a href=""> <i class="feather icon-slash"></i> </a></h6>
+{{--        <h6 class="pr-1 mt-2 mr-1" style="font-size: 12px;font-weight: 500"><a href=""> <i class="feather icon-slash"></i> </a></h6>--}}
     </div>
     <div class="card-body p-0">
+        @can('manage-orders')
         <div class="dashboard-box  nav-container {{isActive('admin.orders', 'dashboard-bg-active')}}" >
             <div class="{{isActive('admin.orders', 'active')}}"></div>
             <div class="dashboard-box-title d-flex flex-row align-items-center justify-content-between">
@@ -48,7 +49,6 @@
                     سفارشات  <div class="badge badge-pill badge-danger badge-up" style="padding: 0.4rem;border-radius: 11px;font-weight: 500;min-width: 22px;height: 20px;font-size: 12px">{{\App\Models\Order::where('status','=','completed')->get()->count()}}</div>
                 </div>
                 <i class="feather icon-arrow-down-circle"></i>
-
             </div>
             <ul class="nav-items {{isActive('admin.orders', 'update-height')}}">
                 <li>
@@ -59,6 +59,8 @@
                 </li>
             </ul>
         </div>
+        @endcan
+        @can(['manage-books','manage-writers','manage-translators','manage-categories'])
         <div class="dashboard-box nav-container {{isActive(['admin.books.index','admin.books.create','admin.books.edit','admin.categories.index','admin.translators.index','admin.writers.index'], 'dashboard-bg-active')}}">
             <div class="{{isActive(['admin.books.index','admin.books.create','admin.books.edit','admin.categories.index','admin.writer.index','admin.translators.index'], 'active')}}"></div>
             <div class="dashboard-box-title d-flex flex-row align-items-center justify-content-between">
@@ -83,70 +85,91 @@
                 </li>
             </ul>
         </div>
-        <div class="dashboard-box {{isActive(['admin.publish-request.index','admin.publish-request.create'], 'dashboard-bg-active')}}">
-            <a href="{{route('admin.publish-request.index')}}">
-                <div class="{{isActive(['admin.publish-request.index','admin.publish-request.create'], 'active')}}"></div>
-                <div class="dashboard-box-title">
-                    <i class="feather icon-printer"></i>
-                    درخواست چاپ
+        @endcan
+        @can('manage-publish-request')
+                <div class="dashboard-box {{isActive(['admin.publish-request.index','admin.publish-request.create'], 'dashboard-bg-active')}}">
+                    <a href="{{route('admin.publish-request.index')}}">
+                        <div class="{{isActive(['admin.publish-request.index','admin.publish-request.create'], 'active')}}"></div>
+                        <div class="dashboard-box-title">
+                            <i class="feather icon-printer"></i>
+                            درخواست چاپ
+                        </div>
+                    </a>
                 </div>
-            </a>
-        </div>
-        <div class="dashboard-box {{isActive(['admin.deliver-book.index','admin.deliver-book.edit'], 'dashboard-bg-active')}}">
-            <a href="{{route('admin.deliver-book.index')}}">
-                <div class="{{isActive(['admin.deliver-book.index','admin.deliver-book.edit'], 'active')}}"></div>
-                <div class="dashboard-box-title">
-                    <i class="feather icon-user-check"></i>
-                    تحویل کتاب (به مولف،...)
-                </div>
-            </a>
-        </div>
-        <div class="dashboard-box {{isActive(['admin.other-sale.index','admin.other-sale.edit'], 'dashboard-bg-active')}}">
-            <a href="{{route('admin.other-sale.index')}}">
-                <div class="{{isActive(['admin.other-sale.index','admin.other-sale.edit'], 'active')}}"></div>
-                <div class="dashboard-box-title">
-                    <i class="feather icon-dollar-sign"></i>
-                    ثبت فروش(نمایشگاه‌ها و ...)
-                </div>
-            </a>
-        </div>
+        @endcan
 
-        <div class="dashboard-box {{isActive('admin.report', 'dashboard-bg-active')}}">
-            <a href="{{route('admin.report')}}">
-                <div class="{{isActive('admin.report', 'active')}}"></div>
-                <div class="dashboard-box-title">
-                    <i class="feather icon-bar-chart"></i>
-                    گزارش فروش
+        @can('manage-deliver-book')
+                <div class="dashboard-box {{isActive(['admin.deliver-book.index','admin.deliver-book.edit'], 'dashboard-bg-active')}}">
+                    <a href="{{route('admin.deliver-book.index')}}">
+                        <div class="{{isActive(['admin.deliver-book.index','admin.deliver-book.edit'], 'active')}}"></div>
+                        <div class="dashboard-box-title">
+                            <i class="feather icon-user-check"></i>
+                            تحویل کتاب (به مولف،...)
+                        </div>
+                    </a>
                 </div>
-            </a>
-        </div>
-        <div class="dashboard-box nav-container {{isActive(['admin.comments.pending','admin.comments.manage','admin.comments.reject'], 'dashboard-bg-active')}}">
-            <div class="{{isActive(['admin.comments.pending','admin.comments.manage','admin.comments.reject'], 'active')}}"></div>
-            <div class="dashboard-box-title d-flex flex-row align-items-center justify-content-between">
-                <div>
-                    <i class="feather icon-printer"></i>
-                    دیدگاه‌ها <div class="badge badge-pill badge-danger badge-up" style="padding: 0.4rem;border-radius: 11px;font-weight: 500;min-width: 22px;height: 20px;font-size: 12px">{{\App\Models\Comment::where('approved','=','0')->get()->count()}}</div>
+        @endcan
+
+            @can('manage-other-sale')
+                <div class="dashboard-box {{isActive(['admin.other-sale.index','admin.other-sale.edit'], 'dashboard-bg-active')}}">
+                    <a href="{{route('admin.other-sale.index')}}">
+                        <div class="{{isActive(['admin.other-sale.index','admin.other-sale.edit'], 'active')}}"></div>
+                        <div class="dashboard-box-title">
+                            <i class="feather icon-dollar-sign"></i>
+                            ثبت فروش(نمایشگاه‌ها و ...)
+                        </div>
+                    </a>
                 </div>
-                <i class="feather icon-arrow-down-circle"></i>
-            </div>
-            <ul class="nav-items {{isActive(['admin.comments.pending','admin.comments.manage','admin.comments.reject'], 'update-height')}}">
-                <li >
-                    <a href="{{route('admin.comments.pending')}}" class="active-link">بررسی نشده</a>
-                </li>
-                <li>
-                    <a href="{{route('admin.comments.manage')}}">مدیریت</a>
-                </li>
-            </ul>
-        </div>
-        <div class="dashboard-box {{isActive(['admin.users.index','admin.users.permissions.create'], 'dashboard-bg-active')}}">
-            <div class="{{isActive(['admin.users.index','admin.users.permissions.create'], 'active')}}"></div>
-            <a href="{{route('admin.users.index')}}">
-                <div class="dashboard-box-title">
-                    <i class="feather icon-users"></i>
-                    مدیریت کاربران
+        @endcan
+            @can('manage-report')
+                <div class="dashboard-box {{isActive('admin.report', 'dashboard-bg-active')}}">
+                    <a href="{{route('admin.report')}}">
+                        <div class="{{isActive('admin.report', 'active')}}"></div>
+                        <div class="dashboard-box-title">
+                            <i class="feather icon-bar-chart"></i>
+                            گزارش فروش
+                        </div>
+                    </a>
                 </div>
-            </a>
-        </div>
+        @endcan
+
+
+
+        @can('manage-comments')
+                <div class="dashboard-box nav-container {{isActive(['admin.comments.pending','admin.comments.manage','admin.comments.reject'], 'dashboard-bg-active')}}">
+                    <div class="{{isActive(['admin.comments.pending','admin.comments.manage','admin.comments.reject'], 'active')}}"></div>
+                    <div class="dashboard-box-title d-flex flex-row align-items-center justify-content-between">
+                        <div>
+                            <i class="feather icon-printer"></i>
+                            دیدگاه‌ها <div class="badge badge-pill badge-danger badge-up" style="padding: 0.4rem;border-radius: 11px;font-weight: 500;min-width: 22px;height: 20px;font-size: 12px">{{\App\Models\Comment::where('approved','=','0')->get()->count()}}</div>
+                        </div>
+                        <i class="feather icon-arrow-down-circle"></i>
+                    </div>
+                    <ul class="nav-items {{isActive(['admin.comments.pending','admin.comments.manage','admin.comments.reject'], 'update-height')}}">
+                        <li >
+                            <a href="{{route('admin.comments.pending')}}" class="active-link">بررسی نشده</a>
+                        </li>
+                        <li>
+                            <a href="{{route('admin.comments.manage')}}">مدیریت</a>
+                        </li>
+                    </ul>
+                </div>
+            @endcan
+
+            @can('manage-users')
+                <div class="dashboard-box {{isActive(['admin.users.index','admin.users.permissions.create'], 'dashboard-bg-active')}}">
+                    <div class="{{isActive(['admin.users.index','admin.users.permissions.create'], 'active')}}"></div>
+                    <a href="{{route('admin.users.index')}}">
+                        <div class="dashboard-box-title">
+                            <i class="feather icon-users"></i>
+                            مدیریت کاربران
+                        </div>
+                    </a>
+                </div>
+            @endcan
+
+
+
         @can('show-access-management')
         <div class="dashboard-box nav-container {{isActive(['admin.permissions.index','admin.roles.index'], 'dashboard-bg-active')}}">
             <div class="{{isActive(['admin.permissions.index','admin.roles.index'], 'active')}}"></div>
@@ -167,15 +190,21 @@
             </ul>
         </div>
         @endcan
-        <div class="dashboard-box {{isActive(['admin.user.orders'], 'dashboard-bg-active')}}">
-            <div class="{{isActive(['admin.user.orders'], 'active')}}"></div>
-            <a href="{{route('admin.user.orders')}}">
-                <div class="dashboard-box-title">
-                    <i class="feather icon-shopping-bag"></i>
-                    سفارشات من
+
+             @can('user-orders')
+                <div class="dashboard-box {{isActive(['admin.user.orders'], 'dashboard-bg-active')}}">
+                    <div class="{{isActive(['admin.user.orders'], 'active')}}"></div>
+                    <a href="{{route('admin.user.orders')}}">
+                        <div class="dashboard-box-title">
+                            <i class="feather icon-shopping-bag"></i>
+                            سفارشات من
+                        </div>
+                    </a>
                 </div>
-            </a>
-        </div>
+            @endcan
+
+            @can('manage-discount-codes')
+
         <div class="dashboard-box {{isActive(['admin.discount-code.index'], 'dashboard-bg-active')}}">
             <div class="{{isActive(['admin.discount-code.index'], 'active')}}"></div>
             <a href="{{route('admin.discount-code.index')}}">
@@ -185,6 +214,8 @@
                 </div>
             </a>
         </div>
+            @endcan
+            @can('manage-news')
         <div class="dashboard-box {{isActive(['admin.news.index'], 'dashboard-bg-active')}}">
             <div class="{{isActive(['admin.news.index'], 'active')}}"></div>
             <a href="{{route('admin.news.index')}}">
@@ -194,6 +225,9 @@
                 </div>
             </a>
         </div>
+            @endcan
+
+            @can('manage-settings')
         <div class="dashboard-box {{isActive(['admin.setting.index'], 'dashboard-bg-active')}}">
             <div class="{{isActive(['admin.setting.index'], 'active')}}"></div>
             <a href="{{route('admin.setting.index')}}">
@@ -203,6 +237,9 @@
                 </div>
             </a>
         </div>
+            @endcan
+
+            @can('manage-profile')
         <div class="dashboard-box {{isActive(['admin.profile.index'], 'dashboard-bg-active')}}">
             <div class="{{isActive(['admin.profile.index'], 'active')}}"></div>
             <a href="{{route('admin.profile.index')}}">
@@ -212,6 +249,7 @@
                 </div>
             </a>
         </div>
+            @endcan
         <div class="dashboard-box" style="">
             {{--                        <div class="active"></div>--}}
 

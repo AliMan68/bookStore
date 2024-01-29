@@ -116,7 +116,7 @@
                                                 <img src="" style="position: absolute;left: 0px;top:0px;max-width: 55px;height: auto" alt="">
                                                 <div class="video-card-gradient-overlay" >
                                                     <div class="d-flex w-100 align-items-center justify-content-center">
-                                                        <p class="text-white " title="{{$book->title}}" style="font-size: 14px" onclick="addToBag('{{$book->title}}','{{$book->authors()->first()['title']}}','{{asset($book->image)}}','{{number_format( (int)($book->price - ($book->price * $book->discount_percent/100)))}}','{{$book->id}}')"> <span id="addOverlayText{{$book->id}}">افزودن به سبد خرید</span> <i class="feather icon-shopping-bag"></i></p>
+                                                        <p class="text-white " title="{{$book->title}}" style="font-size: 14px" onclick="">افزودن به سبد خرید</span> <i class="feather icon-shopping-bag"></i></p>
 
                                                     </div>
                                                 </div>

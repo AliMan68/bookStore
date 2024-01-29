@@ -12,8 +12,20 @@ use Illuminate\Support\Str;
 class OrderController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('can:manage-orders',['except' => ['userOrders']]);
+        $this->middleware('can:manage-report',['only' => ['report']]);
+        $this->middleware('can:user-orders',['only' => ['userOrders']]);
+    }
+
     public function userOrders(){
-        $orders = auth()->user()->orders()->where('status','=','completed')->orWhere('status','=','delivered')->latest('created_at')->paginate(30);
+
+//        $orders = auth()->user()->orders();
+        $orders = Order::query();
+//        $orders = $orders->where('status','=','completed')->orWhere('status','=','delivered');
+        $orders = $orders->where('user_id','=',auth()->user()->id)->paginate(30);
+
         return view('admin.user-orders',compact('orders'));
     }
 

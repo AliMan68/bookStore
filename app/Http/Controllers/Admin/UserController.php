@@ -20,7 +20,9 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('can:edit-user,user')->only('edit');
+        $this->middleware('can:edit-user')->only('edit');
+        $this->middleware('can:delete-user')->only('destroy');
+        $this->middleware('can:manage-users')->only('index');
 
     }
     public function index()
@@ -168,6 +170,6 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->deleteOrFail();
-        return redirect(route('admin.users.index'))->with('success','کاربر با موقیت حذف شد.');
+        return redirect(route('admin.users.index'))->with('success','کاربر با موفقیت حذف شد.');
     }
 }

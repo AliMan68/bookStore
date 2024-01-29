@@ -11,6 +11,7 @@ class CommentController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('can:manage-comments');
     }
 
     public function sendComment(Request $request){

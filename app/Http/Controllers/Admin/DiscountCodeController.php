@@ -9,6 +9,16 @@ use Illuminate\Http\Request;
 
 class DiscountCodeController extends Controller
 {
+
+
+
+    public function __construct()
+    {
+        $this->middleware('can:manage-discount-codes');
+        $this->middleware('can:manage-discount-store')->only('store');
+        $this->middleware('can:manage-discount-destroy')->only('destroy');
+
+    }
     public function index(){
         $codes = DiscountCode::all();
         return view('admin.discount-code.manage',compact('codes'));

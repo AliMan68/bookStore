@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 
 class PublishmentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:manage-publish-request');
+
+    }
+
     public function create(){
         $books = Book::all();
         return view('admin.publishment.new',compact('books'));
@@ -36,19 +42,14 @@ class PublishmentController extends Controller
 
         ]);
         if (!is_null($request->book) && !is_null($request->count)){
-
             $books = $request->book;
             $counts = $request->count;
             for ($i=0;$i<count($books);$i++){
                 $req->books()->attach([$books[$i] => ['count'=>$counts[$i]]]);
             }
-
         }
-
         return redirect(route('admin.publish-request.create'))->with('success','درخواست با موفقیت ثبت شد');
-
     }
-
     public function destroy(PublishmentRequest $publishmentRequest){
         $publishmentRequest->books()->detach();
         $publishmentRequest->deleteOrFail();

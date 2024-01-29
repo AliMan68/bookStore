@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 
 class OtherSalesController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware('can:manage-other-sale');
+    }
     public function index(){
         $sales = OtherSales::all();
         $books = Book::all();

@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:manage-news');
+    }
+
     public function index(){
         $news = News::all();
         return view('admin.news.manage',compact('news'));

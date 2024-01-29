@@ -15,6 +15,12 @@ class DeliverController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('can:manage-deliver-book');
+
+    }
     public function index(){
         $delivers = Deliver::all();
         $books = Book::all();

@@ -62,7 +62,7 @@ class PaymentController extends Controller
         });
         $order->books()->attach($products);
 
-
+//after create order and it's items,next is payment
 
         $token = config('services.payping.token');
         $res_number = Str::random();
@@ -94,18 +94,18 @@ class PaymentController extends Controller
     public function callback(ًRequest $request){
 
         $payment = Payment::where('resnumber','=',$request->clientrefid)->firstOrFail();
-        $token = $token = config('services.payping.token');
+        $token = config('services.payping.token');
 
         $payping = new \PayPing\Payment($token);
         try {
             //amount = $payment->order->price
-            if($payping->verify($request->refid, 1000)){
+            if($verify = $payping->verify($request->refid, 1000)){
                 echo "success";
                 $payment->update([
                     'status' => 1
                 ]);
                 $payment->order->update([
-                    'status'=>'paid'
+                    'status'=>'completed'
                 ]);
 
                 //update inventory and redirect to success page
@@ -121,18 +121,15 @@ class PaymentController extends Controller
 
                 //clean cart after payment completed
                 Cart::flush();
-                return redirect('/successfullPayment');
+                return view('site.successful-payment',compact('verify'));
 
             }else{
-                echo "fail";
+                $error = 'تراکنش نا موفق بود در صورت کسر مبلغ از حساب شما حداکثر پس از 72 ساعت مبلغ به حسابتان برمی گردد';
+                return view('site.failed-payment',compact('error'));
             }
         } catch (Exception $e) {
             return json_decode($e->getMessage());
             echo $e->getMessage();
         }
-    }
-
-    public function redirectToSuccessPay(){
-        return redirect('successfullPayment',compact());
     }
 }

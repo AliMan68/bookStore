@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:manage-settings');
+    }
+
     public function index(){
         $setting = Setting::latest()->first();
         return view('admin.setting',compact('setting'));
