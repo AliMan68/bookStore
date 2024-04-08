@@ -19,13 +19,16 @@
                                 <h6 style="color: darkred;text-align: center;font-size: 14px;" class="mt-2 d-none" id="errMessage">! شماره تلفن وارد شده،معتبر نیست </h6>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="d-flex flex-row align-items-center justify-content-between" id="captchaContainer">
-                                @captcha
-                                <button type="button" class="btn btn-info btn-sm" onclick="$('#captchaContainer>img').attr('src','https://press.persiandade.ir/captcha/image?_=1267098935&amp;_='+Math.random());var captcha=document.getElementById('captcha');if(captcha){captcha.focus()}"> <i class="feather icon-refresh-cw"></i> </button>
+                        <div class="col-md-12 d-flex w-100 align-items-center justify-content-center">
+                            <div class="form-group">
+                                <div class="d-flex flex-row align-items-center justify-content-between" id="captchaContainer">
+                                    @captcha
+                                    <button type="button" class="btn btn-info btn-sm" onclick="$('#captchaContainer>img').attr('src','https://press.persiandade.ir/captcha/image?_=1267098935&amp;_='+Math.random());var captcha=document.getElementById('captcha');if(captcha){captcha.focus()}"> <i class="feather icon-refresh-cw"></i> </button>
+                                </div>
+                                <input type="text" id="captcha" name="captcha" autocomplete="off" class="form-control mt-2">
                             </div>
-                            <input type="text" id="captcha" name="captcha" autocomplete="off" class="form-control mt-2">
                         </div>
+
                             <div class="col-md-12 d-flex w-100 align-items-center justify-content-center mt-2">
                             <button href="" class="btn btn-warning" id="" style="min-width: 250px;border-radius: 15px" onclick="sendMessage()" type="button">
                                 ادامه  <i class="feather icon-arrow-left-circle"></i>
@@ -112,6 +115,8 @@
                     $('#phoneNumber').addClass('d-none')
                     $('#confirmCode').removeClass('d-none')
                     $('#numberContainer').text(phoneNumber)
+
+                    //call verification code api here
                 }else{
                     $("#errMessage").removeClass('d-none'); //Show error
                 }

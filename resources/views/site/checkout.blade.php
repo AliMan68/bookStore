@@ -588,9 +588,7 @@
 
 <script>
     function submitDiscountCode(code) {
-
         var code = $('#discount-code').val()
-
         var totalPrice = parseInt(numberWithoutCommas($('#totalPrice4').text()))
         console.log(totalPrice)
         {{--var totalPrice = {{$totalPrice}}--}}
@@ -598,7 +596,6 @@
             $('#successMessage').removeClass("left-zero",1000, "easeInOutQuad");
             $('#errorMessage').removeClass("left-zero",1000, "easeInOutQuad");
         },3500);
-
         $.ajaxSetup({
             headers : {
                 'X-CSRF-TOKEN' : document.head.querySelector('meta[name="csrf-token"]').content,

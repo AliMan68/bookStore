@@ -34,9 +34,7 @@ Route::get('/order/{order}/payment',[App\Http\Controllers\OrderController::class
 Route::get('/orders',[App\Http\Controllers\OrderController::class,'index'])->name('orders');
 Route::post('/order/{order}/deliver',[App\Http\Controllers\OrderController::class,'deliverOrder'])->name('order.deliver');
 
-
 //
-
 Route::resource('users','\App\Http\Controllers\Admin\UserController');
 Route::get('/users/{user}/permissions/create',[App\Http\Controllers\Admin\UsersPermissionsController::class,'create'])->name('users.permissions.create');
 Route::post('/users/{user}/permissions/store',[App\Http\Controllers\Admin\UsersPermissionsController::class,'store'])->name('users.permissions.store');
@@ -89,3 +87,7 @@ Route::post('/setting/store',[App\Http\Controllers\Admin\SettingController::clas
 Route::get('/profile/index',[App\Http\Controllers\Auth\RegisterController::class,'editProfile'])->name('profile.index');
 Route::post('/profile/{user}/update',[App\Http\Controllers\Auth\RegisterController::class,'update'])->name('profile.update');
 
+
+//bank
+Route::get('/bank/index',[App\Http\Controllers\Admin\BankController::class,'index'])->name('bank.index');
+Route::post('/bank/update',[App\Http\Controllers\Admin\BankController::class,'update'])->name('bank.update');

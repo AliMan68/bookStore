@@ -20,7 +20,7 @@ class CartController extends Controller
             ],$book) ;
             return back()->with('success','کتاب با موفقیت به سبد خرید اضافه شد');
         }
-        return 'Wrong!';
+        return back()->with('fail','کتاب در سبد خرید موجود است');
     }
 
     public function checkoutList(){
@@ -30,8 +30,6 @@ class CartController extends Controller
 
 
     public function quantityChange(Request $request){
-
-
         $data = $request->validate([
             'quantity'=>'required',
             'id'=>'required',

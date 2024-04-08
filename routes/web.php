@@ -43,6 +43,7 @@ Route::get('/',[App\Http\Controllers\HomeController::class,'index'])->name('inde
 
 Route::prefix('auth')->middleware('guest')->group(function (){
     Route::get('login',[App\Http\Controllers\Auth\LoginController::class,'showLoginForm'])->name('auth.loginForm');
+    Route::get('confirm-code',[App\Http\Controllers\Auth\LoginController::class,'showConfirmCode'])->name('auth.confirmCode');
     Route::post('login',[App\Http\Controllers\Auth\LoginController::class,'login'])->name('auth.login');
     Route::get('register',[App\Http\Controllers\Auth\RegisterController::class,'showRegisterForm'])->name('auth.registerForm');
     Route::post('register',[App\Http\Controllers\Auth\RegisterController::class,'register'])->name('auth.register');
@@ -62,12 +63,12 @@ Route::middleware('auth')->group(function (){
     Route::post('/payment/create',[App\Http\Controllers\PaymentController::class,'payment'])->name('payment.create');
     Route::post('/payment/callback',[App\Http\Controllers\PaymentController::class,'callback'])->name('payment.callback');
     Route::post('/discount-code/submit',[App\Http\Controllers\Admin\DiscountCodeController::class,'checkCode'])->name('cart.checkDiscountCode');
-
 });
 Route::get('/success',function (){
     $verify = "اطلاعات پرداخت ";
     return view('site.successful-payment',compact('verify'));
-});
+})->name('payment.success');
+Route::get('/payment/failed',)->name('payment.failed');
 Route::get('/auth/logout',function (){
     auth()->logout();
     return redirect(route('index'));
@@ -75,3 +76,11 @@ Route::get('/auth/logout',function (){
 
 Route::get('/news/{news}/details',[App\Http\Controllers\Admin\NewsController::class,'show'])->name('news.details');
 Route::get('/news',[App\Http\Controllers\Admin\NewsController::class,'allNews'])->name('news.index');
+
+
+//payments
+
+Route::post('/payment/verify/sadad', [PaymentController::class, 'sadadPaymentVerify'])->name('payment.verify.sadad');
+Route::post('/payment/verify/saman', [PaymentController::class, 'samanPaymentVerify'])->name('payment.verify.saman');
+Route::post('/payment/verify/irankish', [PaymentController::class, 'irankishPaymentVerify'])->name('payment.verify.irankish');
+Route::post('/payment/verify/parsian', [PaymentController::class, 'parsianPaymentVerify'])->name('payment.verify.parsian');

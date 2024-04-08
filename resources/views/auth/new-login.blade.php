@@ -38,11 +38,11 @@
                         </div>
 
                         <div class="col-md-12 d-flex w-100 align-items-center justify-content-center mt-3">
-                            <h5 style="text-align: right;font-weight: 500">حساب کاربری ندارید؟ <a href="{{route('auth.registerForm')}}">ثبت‌ نام</a></h5>
+                            <h5 style="text-align: right;font-weight: 500">حساب کاربری ندارید؟ <a href="{{route('auth.confirmCode')}}">ثبت‌ نام</a></h5>
                         </div>
 
                         <div class="col-md-12 d-flex w-100 align-items-center justify-content-center mt-3">
-                            <a href="{{url('/confirm-code')}}" style="font-size: 13px">فراموشی رمز عبور</a>
+                            <a href="{{route('auth.confirmCode')}}" style="font-size: 13px">فراموشی رمز عبور</a>
                         </div>
 
 

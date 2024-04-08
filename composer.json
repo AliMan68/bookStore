@@ -31,7 +31,18 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
-            "app/Http/helpers.php"
+            "app/helper.php",
+            "app/date_helper.php",
+            "app/sms_helper.php",
+            "app/persian_number_helper.php",
+            "app/Sadad.php",
+            "app/Saman.php",
+            "app/crypt.php",
+            "app/FarazSms.php",
+            "app/IranKish.php",
+            "app/SoroshSms.php",
+            "app/ParsianBank.php"
+
         ]
     },
     "autoload-dev": {

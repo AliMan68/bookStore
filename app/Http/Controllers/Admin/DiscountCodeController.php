@@ -24,13 +24,11 @@ class DiscountCodeController extends Controller
         $codes = DiscountCode::all();
         return view('admin.discount-code.manage',compact('codes'));
     }
-
     public function store(Request $request){
         $validated_data = \Illuminate\Support\Facades\Validator::make($request->all(),[
             'code'=>'required|min:3|max:10',
             'percent'=>'required|numeric|max:99|min:1',
         ]);
-
         if ($validated_data->fails()) {
 //            dd($validated_data->errors());
             return back()->with('fail',$validated_data->errors());
@@ -44,9 +42,8 @@ class DiscountCodeController extends Controller
             return back()->with('success','کد تخفیف با موفقیت ثبت شد ');
         }else
             return back()->with('fail','کد تخفیف با این عنوان قبلا ثبت شده است ');
-
     }
-
+    
     public function destroy(DiscountCode $code){
 //        $code->orders()->detach();
         $code->deleteOrFail();

@@ -171,8 +171,8 @@
 
 
         @can('show-access-management')
-        <div class="dashboard-box nav-container {{isActive(['admin.permissions.index','admin.roles.index'], 'dashboard-bg-active')}}">
-            <div class="{{isActive(['admin.permissions.index','admin.roles.index'], 'active')}}"></div>
+        <div class="dashboard-box nav-container {{isActive(['admin.permissions.index','admin.roles.index','admin.bank.index'], 'dashboard-bg-active')}}">
+            <div class="{{isActive(['admin.permissions.index','admin.roles.index','admin.bank.index'], 'active')}}"></div>
             <div class="dashboard-box-title d-flex flex-row align-items-center justify-content-between">
                 <div>
                     <i class="feather icon-stop-circle"></i>
@@ -180,12 +180,15 @@
                 </div>
                 <i class="feather icon-arrow-down-circle"></i>
             </div>
-            <ul class="nav-items {{isActive(['admin.permissions.index','admin.roles.index'], 'update-height')}}">
+            <ul class="nav-items {{isActive(['admin.permissions.index','admin.roles.index','admin.bank.index'], 'update-height')}}">
                 <li >
-                    <a href="{{route('admin.permissions.index')}}" class="active-link">دسترسی‌ها</a>
+                    <a href="{{route('admin.permissions.index')}}">دسترسی‌ها</a>
                 </li>
                 <li>
                     <a href="{{route('admin.roles.index')}}">نقش‌ها</a>
+                </li>
+                <li >
+                    <a href="{{route('admin.bank.index')}}" class="active-link">درگاه پرداخت</a>
                 </li>
             </ul>
         </div>

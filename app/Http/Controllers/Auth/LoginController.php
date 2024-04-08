@@ -10,6 +10,10 @@ class LoginController extends Controller
 {
     //
 
+    public function showConfirmCode(){
+        return view('auth.confirm-code');
+    }
+
     public function showLoginForm(){
 
         return view('auth.new-login');
