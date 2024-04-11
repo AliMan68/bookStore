@@ -33,13 +33,13 @@ class LoginController extends Controller
             $usernameType = 'invalid';
         }
 
-//        $validated_captcha = \Illuminate\Support\Facades\Validator::make($request->all(),[
-//            'captcha' => 'required|captcha'
-//        ]);
-//
-//        if ($validated_captcha->fails()) {
-//            return back()->with('fail','کد کپجا وارد شده صحیح نیست');
-//        }
+        $validated_captcha = \Illuminate\Support\Facades\Validator::make($request->all(),[
+            'captcha' => 'required|captcha'
+        ]);
+
+        if ($validated_captcha->fails()) {
+            return back()->with('fail','کد کپجا وارد شده صحیح نیست');
+        }
 
 
         switch ($usernameType){

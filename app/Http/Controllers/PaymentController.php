@@ -8,9 +8,11 @@ use App\Models\DiscountCode;
 use App\Models\Order;
 use App\Models\Payment;
 use App\Models\PaymentRequest;
+use App\Sadad;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
+use MyCrypt;
 
 class PaymentController extends Controller
 {
@@ -111,14 +113,16 @@ class PaymentController extends Controller
 
         $response = $sadad->request($p_request->amount, $p_request->id, route('payment.verify.sadad'));
         if($response->ResCode != 0){
-            $description = $response->Description;
-//            return view('site.failed-payment', compact('description'));
-            return  redirect(route(''))
+            $error = $response->Description;
+            return view('site.failed-payment', compact('error'));
+
         }else{
             return redirect($sadad->getRedirectUrl() . $response->Token);
         }
 
     }
+
+
 
     public function sadadPaymentVerify(Request $request){
         Session::save();
@@ -132,8 +136,8 @@ class PaymentController extends Controller
         auth()->loginUsingId($p_request->user_id);
 
         if ($pay_res_code != 0){
-            $description = 'تراکنش نا موفق بود در صورت کسر مبلغ از حساب شما حداکثر پس از 72 ساعت مبلغ به حسابتان برمی گردد';
-            return view('site.paymentFailed', compact('description'));
+            $error = 'تراکنش نا موفق بود در صورت کسر مبلغ از حساب شما حداکثر پس از 72 ساعت مبلغ به حسابتان برمی گردد';
+            return view('site.failed-payment', compact('error'));
         }
         $merchant_id = MyCrypt::decrypt(Config::get(Config::KEY_SADAD_MERCHANT_ID)->value);
         $terminal_id = MyCrypt::decrypt(Config::get(Config::KEY_SADAD_TERMINAL_ID)->value);
@@ -193,7 +197,7 @@ class PaymentController extends Controller
             $p_request->is_verified = 1;
             $p_request->save();
 
-            return view('site.paymentSuccess', compact(['description', 'retrival_ref_no', 'system_trace_no', 'amount']));
+            return view('site.successful-payment', compact(['description', 'retrival_ref_no', 'system_trace_no', 'amount']));
 
         }else{
             //failed
@@ -209,8 +213,8 @@ class PaymentController extends Controller
             ]);
             $p_request->is_verified = 1;
             $p_request->save();
-            $description = 'تراکنش نا موفق بود در صورت کسر مبلغ از حساب شما حداکثر پس از 72 ساعت مبلغ به حسابتان برمی گردد';
-            return view('site.paymentFailed', compact('description'));
+            $error = 'تراکنش نا موفق بود در صورت کسر مبلغ از حساب شما حداکثر پس از 72 ساعت مبلغ به حسابتان برمی گردد';
+            return view('site.failed-payment', compact('error'));
         }
     }
 

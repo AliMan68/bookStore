@@ -6,9 +6,10 @@
         <div id="phoneNumber">
             <div class="d-flex flex-column w-100 h-100">
                 <h style="text-align: center;font-size: 2rem;font-weight: 600;padding-bottom: 20px;color: black" id="login-title">
-                    <i class="feather icon-slash"></i> خطا در پرداخت
+                    <i class="feather icon-slash" style="font-size: 7rem;color: darkred"></i><br>
+                    !خطا در پرداخت
                 </h>
-                <p>{{$error}}</p>
+                <p class="text-center text-black-50" style="direction: rtl">{{$error}}</p>
             </div>
         </div>
     </div>

@@ -10,9 +10,18 @@ class Payment extends Model
 {
     use HasFactory,SoftDeletes;
     protected $fillable =[
-      'resnumber',
-      'status'
+        'user_id',
+        'paymentable_id',
+        'paymentable_type',
+        'bank_name',
+        'amount',
+        'receipt',
+        'data',
+        'is_success',
     ];
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
     public function order(){
         return $this->belongsTo(Order::class);
     }

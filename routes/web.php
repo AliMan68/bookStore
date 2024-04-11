@@ -64,11 +64,10 @@ Route::middleware('auth')->group(function (){
     Route::post('/payment/callback',[App\Http\Controllers\PaymentController::class,'callback'])->name('payment.callback');
     Route::post('/discount-code/submit',[App\Http\Controllers\Admin\DiscountCodeController::class,'checkCode'])->name('cart.checkDiscountCode');
 });
-Route::get('/success',function (){
-    $verify = "اطلاعات پرداخت ";
-    return view('site.successful-payment',compact('verify'));
-})->name('payment.success');
-Route::get('/payment/failed',)->name('payment.failed');
+//Route::get('/success',[App\Http\Controllers\PaymentController::class,'success'])->name('payment.success');
+//Route::get('/payment/failed',[App\Http\Controllers\PaymentController::class,'failed'])->name('payment.failed');
+
+
 Route::get('/auth/logout',function (){
     auth()->logout();
     return redirect(route('index'));
@@ -80,7 +79,7 @@ Route::get('/news',[App\Http\Controllers\Admin\NewsController::class,'allNews'])
 
 //payments
 
-Route::post('/payment/verify/sadad', [PaymentController::class, 'sadadPaymentVerify'])->name('payment.verify.sadad');
-Route::post('/payment/verify/saman', [PaymentController::class, 'samanPaymentVerify'])->name('payment.verify.saman');
-Route::post('/payment/verify/irankish', [PaymentController::class, 'irankishPaymentVerify'])->name('payment.verify.irankish');
-Route::post('/payment/verify/parsian', [PaymentController::class, 'parsianPaymentVerify'])->name('payment.verify.parsian');
+Route::post('/payment/verify/sadad', [App\Http\Controllers\PaymentController::class, 'sadadPaymentVerify'])->name('payment.verify.sadad');
+Route::post('/payment/verify/saman', [App\Http\Controllers\PaymentController::class, 'samanPaymentVerify'])->name('payment.verify.saman');
+Route::post('/payment/verify/irankish', [App\Http\Controllers\PaymentController::class, 'irankishPaymentVerify'])->name('payment.verify.irankish');
+Route::post('/payment/verify/parsian', [App\Http\Controllers\PaymentController::class, 'parsianPaymentVerify'])->name('payment.verify.parsian');

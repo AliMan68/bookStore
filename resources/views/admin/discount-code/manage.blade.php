@@ -24,7 +24,7 @@
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group">
                             <label for="off-name">عنوان کد :</label>
-                            <input type="text" id="off-name" class="form-control required" required name="code" value="" placeholder="حداکثر ۶ رقمی . مثلا off-10" >
+                            <input type="text" id="off-name" class="form-control required" required name="code" value="" placeholder="حداکثر 10 رقمی . مثلا off-10" >
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-12">
