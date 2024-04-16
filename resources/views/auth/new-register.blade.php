@@ -13,6 +13,8 @@
                 </p>
                 <form class="form" method="post"  action="{{ route('auth.register') }}">
                     @csrf
+                    <input type="hidden" name="mobile" value="<?php try{echo $_GET['mobile'];}catch (Exception $e){} ?>">
+                    <input type="hidden" name="mobile_token" value="<?php try{echo $_GET['mobile_token'];}catch (Exception $e){} ?>">
                     <div style="direction: rtl" class="row">
                         <div class="col-md-4 col-sm-12">
                             <div class="form-group">
@@ -23,7 +25,7 @@
                         <div class="col-md-4 col-sm-12">
                             <div class="form-group">
                                 <label for="phone">*شماره موبایل :</label>
-                                <input type="text" id="phone" class="form-control required" name="phone" value="{{ old('phone') }}"  placeholder="شماره موبایل" required>
+                                <input type="text" disabled id="phone" class="form-control required" name="" value="{{ $_GET['mobile'] }}"  placeholder="شماره موبایل" required>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-12">
@@ -43,6 +45,17 @@
                                 <label for="passwordRepeat">*تکرار رمز عبور :</label>
                                 <input type="password" id="passwordRepeat" class="form-control required" name="password_confirmation"  value="" placeholder="تکرار رمز عبور" required>
                             </div>
+                        </div>
+
+                        <div class="col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <div class="d-flex flex-row align-items-center justify-content-between" id="captchaContainer">
+                                @captcha
+                                    <button type="button" class="btn btn-info btn-sm" onclick="$('#captchaContainer>img').attr('src','https://press.persiandade.ir/captcha/image?_=1267098935&amp;_='+Math.random());var captcha=document.getElementById('captcha');if(captcha){captcha.focus()}"> <i class="feather icon-refresh-cw"></i> </button>
+                                </div>
+                                <input type="text" id="captcha" name="captcha" autocomplete="off" class="form-control mt-2">
+                            </div>
+
                         </div>
 {{--                        <div class="col-md-4 col-sm-12">--}}
 {{--                            <div class="form-group">--}}

@@ -252,7 +252,7 @@ function roleRemovePermission($role_names, $old_permissions){
 //=========================== files ================================
 
 function canUserUpload($user_id){
-    if(hasRole(Role::ADMIN))
+    if(auth()->user()->is_admin == 1 || auth()->user()->roles()->get()->first()->title == 'کارشناس' )
         return true;
     $time = \Carbon\Carbon::now()->subHour();
     $uploads_count = \App\Models\UploadLog::where('user_id', '=', $user_id)->where('created_at', '>', $time)->count();
@@ -268,9 +268,9 @@ function uploadFile($file){
     if ($size > 50)
         die('حجم فایل بیش از اندازه معین می باشد.');
     $user_id = (is_null(request()->user())) ? 0 :  request()->user()->id;
-    $can_upload = canUserUpload($user_id);
-    if (!$can_upload)
-        die('تعداد و سایز فایلهای آپلود شده در بازه زمانی معین، محدود می باشد.لطفا بعدا امتحان کنید. ');
+//    $can_upload = canUserUpload($user_id);
+//    if (!$can_upload)
+//        die('تعداد و سایز فایلهای آپلود شده در بازه زمانی معین، محدود می باشد.لطفا بعدا امتحان کنید. ');
 
     $valid_extensions = ['pdf', 'doc', 'docx', 'xls', 'xlsx', 'jpeg', 'jpg', 'png', 'zip', 'rar', 'txt', 'ppt', 'pptx', 'mp4', 'mpeg', 'mpeg'];
     $extension = $file->extension();
@@ -287,13 +287,13 @@ function uploadFile($file){
   $name = $random . $user_id . '_' . basename($file->getClientOriginalName());
   $file->move($file_dir, $name);
   $path = $file_dir .'/'. $name;
-    if (\App\Models\UploadLog::count() > 500000)
-        DB::table('upload_logs')->truncate();
-    $log = \App\Models\UploadLog::create([
-        'user_id' => $user_id,
-        'path' => $path,
-        'size' => $size,
-    ]);
+//    if (\App\Models\UploadLog::count() > 500000)
+//        DB::table('upload_logs')->truncate();
+//    $log = \App\Models\UploadLog::create([
+//        'user_id' => $user_id,
+//        'path' => $path,
+//        'size' => $size,
+//    ]);
   return $path;
 }
 
@@ -431,10 +431,10 @@ function getRolesPersianName($user = null){
 
 function findDuplicateUser($mobile = '#', $email = '#', $national_code = '#'){
   return User::where('email', '=', $email)
-    ->orWhere('national_code', '=', $national_code)
-    ->orWhere('mobile', '=', '0'. $mobile)
-    ->orWhere('mobile', '=', ltrim($mobile, '0'))
-    ->orWhere('mobile', '=', $mobile)
+//    ->orWhere('national_code', '=', $national_code)
+    ->orWhere('phone', '=', '0'. $mobile)
+    ->orWhere('phone', '=', ltrim($mobile, '0'))
+    ->orWhere('phone', '=', $mobile)
     ->first();
 }
 

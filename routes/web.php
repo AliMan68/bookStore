@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\MyRegisterController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,7 +49,15 @@ Route::prefix('auth')->middleware('guest')->group(function (){
     Route::post('login',[App\Http\Controllers\Auth\LoginController::class,'login'])->name('auth.login');
     Route::get('register',[App\Http\Controllers\Auth\RegisterController::class,'showRegisterForm'])->name('auth.registerForm');
     Route::post('register',[App\Http\Controllers\Auth\RegisterController::class,'register'])->name('auth.register');
+
+    Route::get('/register/mobile', [MyRegisterController::class, 'registerMobile'])->name('register.mobile');
+    Route::post('/register/send-code', [MyRegisterController::class, 'sendCode'])->name('register.send-code');
+    Route::post('/register/verify-mobile', [MyRegisterController::class, 'verifyMobile'])->name('register.verify-mobile');
+    Route::get('/reset-password/form', [ResetPasswordController::class, 'showResetForm'])->name('reset-password.form');
+    Route::post('/reset-password/send-code', [ResetPasswordController::class, 'sendCode'])->name('reset-password.send-code');
+    Route::post('/reset-password/reset', [ResetPasswordController::class, 'reset'])->name('reset-password.reset');
 });
+
 Route::get('/books/index',[App\Http\Controllers\Site\BookController::class,'index'])->name('books.index');
 Route::get('/nav/search',[App\Http\Controllers\Site\BookController::class,'index'])->name('nav.search');
 Route::get('/books/{book}/details',[App\Http\Controllers\Site\BookController::class,'bookItem'])->name('book.details');

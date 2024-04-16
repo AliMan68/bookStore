@@ -2,7 +2,6 @@
 use \Illuminate\Support\Facades\Route;
 if (!function_exists('isActive')){
 
-
     function isActive($name,$activeClass = ''){
 
         if (is_array($name))

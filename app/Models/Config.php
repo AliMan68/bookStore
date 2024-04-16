@@ -29,6 +29,27 @@ class Config extends Model
         return self::get($key)->value;
     }
 
+    //################################## sms #############################################
+
+    const KEY_SMS_COMPANY = 'sms-company';
+    const KEY_SMS_IR = 'sms-ir';
+    const KEY_SMS_IR_API_KEY = 'sms-ir-api-key';
+    const KEY_SMS_IR_SECRET_KEY = 'sms-ir-secret-key';
+    const KEY_SMS_IR_LINE_NUMBER = 'sms-ir-line-number';
+    const KEY_SMS_IR_TEMPLATE_NUMBER = 'sms-ir-template-number';
+    const KEY_SMS_FARAZ = 'sms-faraz';
+    const KEY_SMS_FARAZ_USERNAME = 'sms-faraz-username';
+    const KEY_SMS_FARAZ_PASSWORD = 'sms-faraz-password';
+    const KEY_SMS_FARAZ_FROM_NUMBER = 'sms-faraz-from-number';
+    const KEY_SMS_FARAZ_PATTERN_CODE = 'sms-faraz-pattern-code';
+    const KEY_SMS_KAVENEGAR = 'sms-kavenegar';
+    const KEY_SMS_KAVENEGAR_API_KEY = 'sms-kavenegar-api-key';
+    const KEY_SMS_KAVENEGAR_SENDER = 'sms-kavenegar-sender';
+    const KEY_SMS_SOROSH = 'sms-sorosh';
+    const KEY_SMS_SOROSH_USERNAME = 'sms-sorosh-username';
+    const KEY_SMS_SOROSH_PASSWORD = 'sms-sorosh-password';
+    const KEY_SMS_SOROSH_API_KEY = 'sms-sorosh-api-key';
+    const KEY_SMS_SOROSH_LINE_NUMBER = 'sms-sorosh-line-number';
 
 
     //################################ payment setting ################################

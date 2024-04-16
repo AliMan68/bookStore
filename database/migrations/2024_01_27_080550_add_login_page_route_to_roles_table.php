@@ -14,7 +14,7 @@ class AddLoginPageRouteToRolesTable extends Migration
     public function up()
     {
         Schema::table('roles', function (Blueprint $table) {
-            $table->text('login_page_route')->after('title')->default('index');
+            $table->string('login_page_route', 400)->after('title')->nullable()->default('index');
         });
     }
 

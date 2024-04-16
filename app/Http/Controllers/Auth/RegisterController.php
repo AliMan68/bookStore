@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\VerificationCode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -17,6 +18,8 @@ class RegisterController extends Controller
     }
 
     public function showRegisterForm(){
+        if (!isset($_GET['mobile']) || !isset($_GET['mobile_token']))
+            return redirect(route('register.mobile'));
         return view('auth.new-register');
     }
     public function register(Request $request){
@@ -27,9 +30,28 @@ class RegisterController extends Controller
 //            'password'=>['required', 'string', 'min:8', 'confirmed'],
 //        ]);
 
+        $request = request();
+        $this->validate($request, [
+            'captcha' => 'required|captcha'
+        ]);
+
+        $mobile = $request->mobile;
+        $token = $request->mobile_token;
+        $result = VerificationCode::validateToken($token, $mobile);
+        if ($result == false) {
+            return back()->with('failed','خطایی در ثبت نام رخ داده است');
+        }
+
+        $user = findDuplicateUser($mobile);
+        if ($user != null) {
+            return back()->with('failed','این شماره موبایل قبلا در سامانه ثبت شده است');
+        }
+
+
         $validated_data = \Illuminate\Support\Facades\Validator::make($request->all(),[
             'name'=>['required','string','max:255','min:3'],
-            'phone'=>['required','string','regex:/^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$/','unique:users,phone'],
+//            'mobile'=>['required','string','regex:/^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$/','unique:users,phone'],
+            'mobile'=>['required'],
             'email'=>['required','email','unique:users','string'],
             'password'=>['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -48,7 +70,7 @@ class RegisterController extends Controller
         try {
             $user = User::create([
                 'name'=>$request->name,
-                'phone'=>$request->phone,
+                'phone'=>$mobile,
                 'email'=>$request->email,
                 'is_staff'=>1,
                 'password'=>Hash::make($request->password),

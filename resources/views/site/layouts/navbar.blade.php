@@ -7,7 +7,7 @@
                         <div class="" style="min-width: 180px">
 
                             @auth
-
+                                
 
                                 @if(auth()->user()->is_admin != 1 )
                                     @if(auth()->user()->roles()->get()->first()->title == 'کاربر' )
@@ -26,17 +26,17 @@
                                         {{--                                                </button>--}}
                                         {{--                                            </a>--}}
                                         {{--                                    @endif--}}
-                                    @else
-
-                                        <a href="{{url('admin/orders?type=completed&search=')}}">
-                                            <button class="btn btn-info nav-login-btn" style="font-weight: 500;font-size: 0.88rem;!important;">
-                                                پنل کابری
-                                                <i class="feather icon-user" style=""></i>
-                                            </button>
-                                        </a>
+									@else
+                          				 
+                                    <a href="{{url('admin/orders?type=completed&search=')}}">
+                                        <button class="btn btn-info nav-login-btn" style="font-weight: 500;font-size: 0.88rem;!important;">
+                                            پنل کابری
+                                            <i class="feather icon-user" style=""></i>
+                                        </button>
+                                    </a>
                                     @endif
                                 @else
-
+                                    
                                     <a href="{{url('admin/orders?type=completed&search=')}}">
                                         <button class="btn btn-info nav-login-btn" style="font-weight: 500;font-size: 0.88rem;!important;">
                                             پنل کابری
@@ -47,12 +47,12 @@
 
                             @endauth
                             @guest
-                                <a href="{{route('auth.login')}}">
-                                    <button class="btn btn-info nav-login-btn" style="font-weight: 500;font-size: 0.88rem;!important;">
-                                        ورود یا ثبت ‌نام
-                                        <i class="feather icon-user" style=""></i>
-                                    </button>
-                                </a>
+                                    <a href="{{route('auth.login')}}">
+                                        <button class="btn btn-info nav-login-btn" style="font-weight: 500;font-size: 0.88rem;!important;">
+                                            ورود یا ثبت ‌نام
+                                            <i class="feather icon-user" style=""></i>
+                                        </button>
+                                    </a>
                             @endguest
 
 
@@ -190,12 +190,12 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                 </div>
                 <div class="modal-footer d-flex flex-row align-items-center justify-content-center w-100">
-                    <button type="submit" href="" class="btn btn-warning" id="" style="min-width: 150px">
-                        <i class="feather icon-search"></i> جستجو
-                    </button>
-                </div>
+                <button type="submit" href="" class="btn btn-warning" id="" style="min-width: 150px">
+                    <i class="feather icon-search"></i> جستجو
+                </button>
+            </div>
             </form>
         </div>
     </div>
@@ -229,7 +229,7 @@
                             </a>
                             <div class="d-flex flex-column align-items-start mr-4" style="max-width: 35%" id="modal-book-card-text">
                                 <p style="font-size: 13px;text-align: right;padding: 3px;padding-right: 10px;text-align: justify;color: black;min-width: 231px;">
-                                    {{$book->title}} اثر
+                                     {{$book->title}} اثر
                                     @foreach ($book->authors as $author)
                                         {{$author->title}} -
                                     @endforeach
