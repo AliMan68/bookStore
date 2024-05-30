@@ -128,21 +128,26 @@
                                                     اثر
                                                         {{$book->authors()->first()['title']}}
                                                 </div>
-{{--                                                @if($book->count >0)--}}
-{{--                                                @endif--}}
-                                                @if($book->discount_percent > 0)
-                                                    <div class="price" >
-                                                        <span class="offed-price"> {{number_format($book->price)}}  </span>
-                                                        <span  class="off-percent"> {{$book->discount_percent}}%</span>
-                                                        <div class="price">
-                                                            {{number_format( (int)($book->price - ($book->price * $book->discount_percent/100)))}} تومان
+                                                @if($book->count >0)
+                                                    @if($book->discount_percent > 0)
+                                                        <div class="price" >
+                                                            <span class="offed-price"> {{number_format($book->price)}}  </span>
+                                                            <span  class="off-percent"> {{$book->discount_percent}}%</span>
+                                                            <div class="price">
+                                                                {{number_format( (int)($book->price - ($book->price * $book->discount_percent/100)))}} تومان
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    @else
+                                                        <div class="price">
+                                                            {{number_format($book->price)}} تومان
+                                                        </div>
+                                                    @endif
                                                 @else
                                                     <div class="price">
-                                                        {{number_format($book->price)}} تومان
+                                                        ناموجود
                                                     </div>
                                                 @endif
+
                                             </a>
                                         </div>
                                     </div>

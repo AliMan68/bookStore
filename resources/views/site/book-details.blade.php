@@ -62,25 +62,35 @@
                         </ul>
                     </div>
                     <div class="d-flex flex-column align-items-center" style="width: 350px">
-                        @if(!(\App\Helpers\Cart\Cart::has($book)) )
-                            <button class="blog-slider__button d-flex align-items-center justify-content-center w-100" onclick="$('#addToCardForm').submit()" style="width: 100%;max-width: 274px;max-height: 52px;border: none;box-shadow: none" id="details-button">
-                                <div style="display: flex;padding: 0 10px;text-align: center;min-height: 32px" class="align-items-center w-100 justify-content-around" >
-                                    <p style="font-size: 18px;padding-left: 5px;color: whitesmoke;margin-bottom: 0px"> خرید </p>
-                                    <div style="padding: 10px 2px">|</div>
-                                    <div class="d-flex flex-column align-items-center justify-content-around">
-                                        <p style="font-size: 10px;color: whitesmoke;text-decoration: line-through;margin-bottom: 0px" class="d-none d-md-block"> {{number_format($book->price)}} تومان </p>
-                                        <p style="font-size: 15px;color: whitesmoke;margin-bottom: 0px"> {{number_format( (int)($book->price - ($book->price * $book->discount_percent/100)))}} تومان </p>
-                                    </div>
-                                </div>
-                            </button>
 
+                        @if($book->count >0)
+                            @if(!(\App\Helpers\Cart\Cart::has($book)) )
+                                <button class="blog-slider__button d-flex align-items-center justify-content-center w-100" onclick="$('#addToCardForm').submit()" style="width: 100%;max-width: 274px;max-height: 52px;border: none;box-shadow: none" id="details-button">
+                                    <div style="display: flex;padding: 0 10px;text-align: center;min-height: 32px" class="align-items-center w-100 justify-content-around" >
+                                        <p style="font-size: 18px;padding-left: 5px;color: whitesmoke;margin-bottom: 0px"> خرید </p>
+                                        <div style="padding: 10px 2px">|</div>
+                                        <div class="d-flex flex-column align-items-center justify-content-around">
+                                            <p style="font-size: 10px;color: whitesmoke;text-decoration: line-through;margin-bottom: 0px" class="d-none d-md-block"> {{number_format($book->price)}} تومان </p>
+                                            <p style="font-size: 15px;color: whitesmoke;margin-bottom: 0px"> {{number_format( (int)($book->price - ($book->price * $book->discount_percent/100)))}} تومان </p>
+                                        </div>
+                                    </div>
+                                </button>
+
+                            @else
+                                <button class="blog-slider__button d-flex align-items-center justify-content-center w-100"style="width: 100%;max-width: 274px;max-height: 52px;border: none;box-shadow: none" id="details-button">
+                                    <div style="display: flex;padding: 0 10px;text-align: center;min-height: 32px" class="align-items-center w-100 justify-content-around" >
+                                        <p style="font-size: 18px;padding-left: 5px;color: whitesmoke;margin-bottom: 0px;font-size: 11px"><i class="feather icon-check-circle"></i> این محصول در سبد خرید موجود است</p>
+                                    </div>
+                                </button>
+                            @endif
                         @else
                             <button class="blog-slider__button d-flex align-items-center justify-content-center w-100"style="width: 100%;max-width: 274px;max-height: 52px;border: none;box-shadow: none" id="details-button">
-                                <div style="display: flex;padding: 0 10px;text-align: center;min-height: 32px" class="align-items-center w-100 justify-content-around" >
-                                    <p style="font-size: 18px;padding-left: 5px;color: whitesmoke;margin-bottom: 0px;font-size: 11px"><i class="feather icon-check-circle"></i> این محصول در سبد خرید موجود است</p>
+                                <div style="display: flex;padding: 0 10px;text-align: center;min-height: 32px" class="align-items-center w-100 justify-content-around">
+                                    <p style="font-size: 18px;padding-left: 5px;color: whitesmoke;margin-bottom: 0px;font-size: 11px"><i class="feather icon-check-circle"></i>ناموجود</p>
                                 </div>
                             </button>
                         @endif
+
                         <form action="{{route('card.add',$book->id)}}" method="post" id="addToCardForm">
                             @csrf
                         </form>
@@ -200,7 +210,7 @@
                                 </div>
 
                                 <div class="col-4 m-auto">
-                                    <a  type="submit" href="{{url('/logister')}}" class="btn btn-warning" id="">
+                                    <a  type="submit" href="{{url('/auth/login')}}" class="btn btn-warning" id="">
                                         <i class="feather icon-check-circle"></i>ورود/عضویت
                                     </a>
                                 </div>

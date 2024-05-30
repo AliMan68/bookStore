@@ -133,7 +133,7 @@
                                 <div class="swiper-multiple swiper-container" style="direction: rtl">
                                     <div class="swiper-wrapper py-2">
                                         @foreach($categories as $category)
-                                            <a href="" class="swiper-slide rounded swiper-shadow d-flex @if(\Illuminate\Support\Facades\Request::path() == 'category/'.$category->id.'/books') active @endif" >
+                                            <a href="{{url('/books/index?categories[]='.$category->id)}}" class="swiper-slide rounded swiper-shadow d-flex @if(\Illuminate\Support\Facades\Request::path() == 'category/'.$category->id.'/books') active @endif" >
                                                 @if(\Illuminate\Support\Facades\Request::path() == 'category/'.$category->id.'/books')
                                                     <i class="feather icon-arrow-left-circle " style="margin-left: 3px;margin-top: 6px"></i>
                                                 @endif

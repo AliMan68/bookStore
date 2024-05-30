@@ -11,7 +11,7 @@ class NewsController extends Controller
 
     public function __construct()
     {
-        $this->middleware('can:manage-news');
+        $this->middleware('can:manage-news')->except(['show','allNews']);
     }
 
     public function index(){

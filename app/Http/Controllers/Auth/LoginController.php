@@ -41,7 +41,6 @@ class LoginController extends Controller
             return back()->with('fail','کد کپجا وارد شده صحیح نیست');
         }
 
-
         switch ($usernameType){
             case 'email':
                 $validated_data = \Illuminate\Support\Facades\Validator::make($request->all(),[
@@ -54,7 +53,7 @@ class LoginController extends Controller
                 if (auth()->attempt(array('email'=>$request->username,'password'=>$request->password)))
                     return redirect()->intended('/');
                 else
-                    return redirect()->back()->with('fail','نام کاربری یا ایمیل صحیح نیست');
+                    return redirect()->back()->with('fail','نام کاربری یا رمز عبور صحیح نیست');
                 break;
             case 'phone':
 
@@ -69,7 +68,7 @@ class LoginController extends Controller
                 if (auth()->attempt(array('phone'=>$request->username,'password'=>$request->password)))
                     return redirect()->intended('/');
                 else
-                    return redirect()->back()->with('fail','نام کاربری یا ایمیل صحیح نیست');
+                    return redirect()->back()->with('fail','نام کاربری یا رمز عبور صحیح نیست');
                 break;
             default:
                 return redirect()->back()->with('fail','فرمت شماره همراه یا ایمیل صحیح نیست');

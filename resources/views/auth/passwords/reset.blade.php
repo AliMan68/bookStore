@@ -5,9 +5,7 @@
     <!--begin::Content-->
     <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
         <!--begin::Logo-->
-        <a href="/" class="mb-12">
-            <img alt="Logo" src="/" class="h-40px" />
-        </a>
+      
         <!--end::Logo-->
         <!--begin::Wrapper-->
         <div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
@@ -27,33 +25,32 @@
                 <!--begin::Heading-->
                 <div class="text-center mb-10">
                     <!--begin::Title-->
-                    <h1 class="text-dark mb-3">رمز عبور خود را فراموش کرده اید؟</h1>
+                    <h5 class="text-dark mb-3">شماره موبایل ثبت نامی خود را وارد نمایید</h5>
                     <!--end::Title-->
                     <!--begin::Link-->
-                    <div class="text-gray-400 fw-bold fs-4">شماره موبایل ثبت نامی خود را وارد نمایید.</div>
+                    
                     <!--end::Link-->
                 </div>
                 <!--begin::Heading-->
                 <!--begin::Input group-->
                 <div class="fv-row mb-10">
-                    <label class="form-label fw-bolder text-gray-900 fs-6">موبایل</label>
+                   
                     <input class="form-control form-control-solid" type="text" placeholder="09000000000" name="mobile" autocomplete="off" />
                 </div>
                 <!--end::Input group-->
                 <!--begin::Input group-->
                 <div class="fv-row mb-10">
                     <!--begin::Wrapper-->
-                    <div class="d-flex flex-stack mb-2">
-                        <!--begin::Label-->
-                        <label class="form-label fw-bolder text-dark fs-6 mb-0">کد امنیتی</label>
-                        <!--end::Label-->
-                        <!--begin::Link-->
-                        <img alt="برای نمایش صفحه را رفرش کنید" src="{{captcha_src()}}">
-                        <!--end::Link-->
-                    </div>
+                    <div class="form-group">
+                                <div class="d-flex flex-row align-items-center justify-content-between" id="captchaContainer">
+                                @captcha
+                                    <button type="button" class="btn btn-info btn-sm" onclick="$('#captchaContainer>img').attr('src','https://press.persiandade.ir/captcha/image?_=1267098935&amp;_='+Math.random());var captcha=document.getElementById('captcha');if(captcha){captcha.focus()}"> <i class="feather icon-refresh-cw"></i> </button>
+                                </div>
+                                <input class="form-control form-control-lg form-control-solid required"  type="text" name="captcha" id="captcha"  required/>
+                            </div>
                     <!--end::Wrapper-->
                     <!--begin::Input-->
-                    <input class="form-control form-control-lg form-control-solid required"  type="text" name="captcha" id="captcha"  required/>
+                    
                     <!--end::Input-->
                 </div>
                 <!--end::Input group-->
@@ -68,7 +65,7 @@
                 <!--begin::Actions-->
                 <div class="d-flex flex-wrap justify-content-center pb-lg-0">
                     <button type="submit" class="btn btn-lg btn-primary w-100 mb-5 fw-bolder">
-                        ارسال
+                        ارسال کد
                     </button>
 
                 </div>

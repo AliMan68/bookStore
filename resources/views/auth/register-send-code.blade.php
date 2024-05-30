@@ -16,7 +16,7 @@
                     <div class="row">
                         <div class="col-md-12 d-flex w-100 align-items-center justify-content-center">
                             <div class="form-group">
-                                <input type="text" name="mobile" class="form-control" id="phone" maxlength="11" placeholder="شماره همراه خود را وارد نمایید" style="min-height: 50px; border: 1px gray solid;text-align: center;font-size: 14px;max-width: 310px;border-radius: 10px;-webkit-box-shadow: inset 0 0 0 30px #fff !important;padding: 19px 30px;"  required>
+                                <input type="text" name="mobile" class="form-control" id="phone" maxlength="11" placeholder="شماره همراه    " style="min-height: 50px; border: 1px gray solid;text-align: center;font-size: 14px;max-width: 310px;border-radius: 10px;-webkit-box-shadow: inset 0 0 0 30px #fff !important;padding: 19px 30px;"  required>
                                 <h6 style="color: darkred;text-align: center;font-size: 14px;" class="mt-2 d-none" id="errMessage">! شماره تلفن وارد شده،معتبر نیست </h6>
                                 <div class=" flex-column align-items-between my-1 p-0">
                                     @if(\Illuminate\Support\Facades\Session::get('fail'))
