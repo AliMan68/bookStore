@@ -1,4 +1,4 @@
-@component('site.layouts.content',['title'=>'تایید شماره موبایل'])
+@component('site.layout.content',['title'=>'تایید شماره موبایل'])
     @slot('headerTitle')
         تایید شماره موبایل
     @endslot
@@ -22,8 +22,11 @@
                         <div class="col-md-12 d-flex w-100 align-items-center justify-content-center">
                             <div class="form-group">
                                 <div class="d-flex flex-row align-items-center justify-content-between" id="captchaContainer">
-                                    @captcha
-                                    <button type="button" class="btn btn-info btn-sm" onclick="$('#captchaContainer>img').attr('src','https://press.persiandade.ir/captcha/image?_=1267098935&amp;_='+Math.random());var captcha=document.getElementById('captcha');if(captcha){captcha.focus()}"> <i class="feather icon-refresh-cw"></i> </button>
+{{--                                    @captcha--}}
+{{--                                    <button type="button" class="btn btn-info btn-sm" onclick="$('#captchaContainer>img').attr('src','https://press.persiandade.ir/captcha/image?_=1267098935&amp;_='+Math.random());var captcha=document.getElementById('captcha');if(captcha){captcha.focus()}"> <i class="feather icon-refresh-cw"></i> </button>--}}
+                                    <img src="{{ captcha_src('flat') }}" onclick="this.src='/captcha/default?'+Math.random()"  alt="captcha" id="captchaCode" >
+                                    {{--                                        <button type="button" class="btn btn-info btn-sm" onclick="$('#captchaContainer>img').attr('src','https://press.persiandade.ir/captcha/image?_=1267098935&amp;_='+Math.random());var captcha=document.getElementById('captcha');if(captcha){captcha.focus()}"> <i class="feather icon-refresh-cw"></i> </button>--}}
+                                    <a type="button" href="javascript:;" class="btn btn-info btn-sm" onclick="document.getElementById('captchaCode').src='/captcha/default?'+Math.random()"> <i class="feather icon-refresh-cw"></i> </a>
                                 </div>
                                 <input type="text" id="captcha" name="captcha" autocomplete="off" class="form-control mt-2">
                             </div>

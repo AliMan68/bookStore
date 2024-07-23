@@ -1,11 +1,9 @@
-@component('site.layout.content',['title'=>' کتاب‌ها'])
-    @slot('headerTitle')
-        جزییات کتاب {{$book->title}}
-    @endslot
+<div class="container" id="" style="margin-top:6.9rem;height: auto;min-height: 260px">
     <ul class="breadcrumb d-none d-md-block text-right">
-        <li class="breadcrumb-item"><a href="{{url('/')}}">خانه</a></li>
-        <li class="breadcrumb-item"><a href="{{route('books.index')}}">کتاب‌</a></li>
+        <li class="breadcrumb-item"><a href="{{url('/')}}"  wire:navigate>خانه</a></li>
+        <li class="breadcrumb-item"><a href="{{route('books.index')}}" wire:navigate>کتاب‌</a></li>
         <li class="breadcrumb-item active">{{$book->title}}</li>
+
     </ul>
     <div class="row mt-2" style="direction: rtl">
         <div class="col-md-2 col-sm-12 m-auto d-flex align-items-center justify-content-start w-100 h-100" id="book-details-image-flex">
@@ -25,7 +23,7 @@
                             <li>
                                 <p> نویسنده :
                                     @foreach ($book->authors as $author)
-                                          {{$author->title}} -
+                                        {{$author->title}} -
                                     @endforeach
                                 </p>
                             </li>
@@ -65,7 +63,7 @@
 
                         @if($book->count >0)
                             @if(!(\App\Helpers\Cart\Cart::has($book)) )
-                                <button class="blog-slider__button d-flex align-items-center justify-content-center w-100" onclick="$('#addToCardForm').submit()" style="width: 100%;max-width: 274px;max-height: 52px;border: none;box-shadow: none" id="details-button">
+                                <button class="blog-slider__button d-flex align-items-center justify-content-center w-100"  wire:click="addToCard({{$book->id}})" style="width: 100%;max-width: 274px;max-height: 52px;border: none;box-shadow: none" id="details-button">
                                     <div style="display: flex;padding: 0 10px;text-align: center;min-height: 32px" class="align-items-center w-100 justify-content-around" >
                                         <p style="font-size: 18px;padding-left: 5px;color: whitesmoke;margin-bottom: 0px"> خرید </p>
                                         <div style="padding: 10px 2px">|</div>
@@ -77,7 +75,7 @@
                                 </button>
 
                             @else
-                                <button class="blog-slider__button d-flex align-items-center justify-content-center w-100"style="width: 100%;max-width: 274px;max-height: 52px;border: none;box-shadow: none" id="details-button">
+                                <button class="blog-slider__button d-flex align-items-center justify-content-center w-100"style="width: 100%;max-width: 274px;max-height: 52px;border: none;box-shadow: none" id="details-button" wire:click="addToCard({{$book->id}})">
                                     <div style="display: flex;padding: 0 10px;text-align: center;min-height: 32px" class="align-items-center w-100 justify-content-around" >
                                         <p style="font-size: 18px;padding-left: 5px;color: whitesmoke;margin-bottom: 0px;font-size: 11px"><i class="feather icon-check-circle"></i> این محصول در سبد خرید موجود است</p>
                                     </div>
@@ -91,9 +89,10 @@
                             </button>
                         @endif
 
-                        <form action="{{route('card.add',$book->id)}}" method="post" id="addToCardForm">
-                            @csrf
-                        </form>
+
+                            {{--                        <form action="{{route('card.add',$book->id)}}" method="post" id="addToCardForm">--}}
+                            {{--                            @csrf--}}
+                            {{--                        </form>--}}
                         <div class="d-none d-md-block">
                             <ul class="mt-4 " style="display: inline-block;!important;display: flex">
                                 <li style="list-style-type: none;" class="ml-2">
@@ -127,11 +126,11 @@
 
                 @if($book->comments()->where('approved','=','1')->count() > 0)
                     <div class="d-flex flex-row align-items-center justify-content-between w-100 h-100" id="main-book-flex-box">
-                    <div class="d-flex flex-row align-items-start justify-content-between h-100 w-100" id="comment-flex">
-                        <h1 style="font-size: 18px;font-weight: 500" class="text-right"><i class="feather icon-message-circle"></i> نظرات <span>کاربران درباره این کتاب</span> </h1>
-                        <p class="mt-1 p-1 text-muted" href="" style="background: white;border: 1px #ccc solid;font-size: 11px;cursor: pointer;border: 1px solid #07307c" data-toggle="modal" data-target="#comment"> <i class="feather icon-edit"></i> نظر خود را بنویسید </p>
+                        <div class="d-flex flex-row align-items-start justify-content-between h-100 w-100" id="comment-flex">
+                            <h1 style="font-size: 18px;font-weight: 500" class="text-right"><i class="feather icon-message-circle"></i> نظرات <span>کاربران درباره این کتاب</span> </h1>
+                            <p class="mt-1 p-1 text-muted" href="" style="background: white;border: 1px #ccc solid;font-size: 11px;cursor: pointer;border: 1px solid #07307c" data-toggle="modal" data-target="#comment"> <i class="feather icon-edit"></i> نظر خود را بنویسید </p>
+                        </div>
                     </div>
-                </div>
                     @foreach($book->comments()->where('approved','=','1')->get() as $comment)
                         <div class="{{!$loop->first ? 'mt-4' : ''}}" style="">
                             <div class="d-flex flex-row w-100">
@@ -141,7 +140,7 @@
                             </div>
                             <div class="d-flex flex-row-reverse mt-1 w-100 " style="{{!$loop->last ? 'border-bottom: 1px gray dotted' : ''}}">
                                 <p style="font-size: 11px;color: #444444;text-align: justify;line-height: 1.7" class="d-none d-md-block" >
-                                     {{jdate($comment->created_at)->ago()}}   توسط <strong> {{$comment->user->name}} </strong> <span style="background:#002a79;padding:5px;color: white;font-size: 9px" class="mx-1"> خریدار این کتاب </span>  ثبت شده.
+                                    {{jdate($comment->created_at)->ago()}}   توسط <strong> {{$comment->user->name}} </strong> <span style="background:#002a79;padding:5px;color: white;font-size: 9px" class="mx-1"> خریدار این کتاب </span>  ثبت شده.
                                 </p>
 
                             </div>
@@ -194,27 +193,27 @@
                         </form>
                     @endauth
                     @guest()
-                            <div class="row">
-                                {{--                        <div class="col-md-12">--}}
-                                {{--                            <div class="form-group d-flex flex-column align-items-center ">--}}
-                                {{--                                <label for="comment" class="d-flex text-right p-2" style="background: #22adad63; color: #0078d0;border-radius: 4px">برای درج نظر یا دیدگاه باید ابتدا وارد حساب کاربری خود شوید یا اگر عضو نیستید حساب کاربری ایجاد کنید :</label>--}}
-                                {{--                                <input type="number" style="width: 300px;border: 1px dimgray solid;border-radius: 5px;text-align: center;margin-top:25px;margin-bottom:45px"  class="form-control required" id="comment " name="" placeholder="شماره همراه خود را وارد نمایید" required>--}}
-                                {{--                            </div>--}}
-                                {{--                        </div>--}}
-                                {{--                        <hr>--}}
-                                {{--                        <col-12>--}}
-                                {{--                            <hr>--}}
-                                {{--                        </col-12>--}}
-                                <div class="col-10 m-auto">
-                                    <label for="comment" class="d-flex text-right p-2" style="background: #22adad63; color: #0078d0;border-radius: 4px">برای درج نظر یا دیدگاه باید ابتدا وارد حساب کاربری خود شوید یا اگر عضو نیستید حساب کاربری ایجاد کنید :</label>
-                                </div>
-
-                                <div class="col-4 m-auto">
-                                    <a  type="submit" href="{{url('/auth/login')}}" class="btn btn-warning" id="">
-                                        <i class="feather icon-check-circle"></i>ورود/عضویت
-                                    </a>
-                                </div>
+                        <div class="row">
+                            {{--                        <div class="col-md-12">--}}
+                            {{--                            <div class="form-group d-flex flex-column align-items-center ">--}}
+                            {{--                                <label for="comment" class="d-flex text-right p-2" style="background: #22adad63; color: #0078d0;border-radius: 4px">برای درج نظر یا دیدگاه باید ابتدا وارد حساب کاربری خود شوید یا اگر عضو نیستید حساب کاربری ایجاد کنید :</label>--}}
+                            {{--                                <input type="number" style="width: 300px;border: 1px dimgray solid;border-radius: 5px;text-align: center;margin-top:25px;margin-bottom:45px"  class="form-control required" id="comment " name="" placeholder="شماره همراه خود را وارد نمایید" required>--}}
+                            {{--                            </div>--}}
+                            {{--                        </div>--}}
+                            {{--                        <hr>--}}
+                            {{--                        <col-12>--}}
+                            {{--                            <hr>--}}
+                            {{--                        </col-12>--}}
+                            <div class="col-10 m-auto">
+                                <label for="comment" class="d-flex text-right p-2" style="background: #22adad63; color: #0078d0;border-radius: 4px">برای درج نظر یا دیدگاه باید ابتدا وارد حساب کاربری خود شوید یا اگر عضو نیستید حساب کاربری ایجاد کنید :</label>
                             </div>
+
+                            <div class="col-4 m-auto">
+                                <a  type="submit" href="{{url('/auth/login')}}" class="btn btn-warning" id="">
+                                    <i class="feather icon-check-circle"></i>ورود/عضویت
+                                </a>
+                            </div>
+                        </div>
                     @endguest
 
                 </div>
@@ -278,25 +277,19 @@
         </div>
     </div>
 
+</div>
 
-    @slot('script')
-        <script>
-            $(window).load(function() {
-                $('#navigation-menu').addClass("smaller")
-            });
+@script
+<script>
+    document.addEventListener('livewire:navigated', () => {
+        $('#navigation-menu').addClass("smaller")
+    });
 
-            $("#comment-btn").click(function() {
-                // console.log($("#customers").offset().top)
-                $('html, body').animate({
-                    scrollTop: $("#comments").offset().top - 140
-                }, 1333);
-            });
-            $("#about").click(function() {
-                // console.log($("#customers").offset().top)
-                $('html, body').animate({
-                    scrollTop: $("#about-book").offset().top - 140
-                }, 1333);
-            });
-        </script>
-    @endslot
-@endcomponent
+
+        Livewire.on('cartUpdated', (count) => {
+                $('#bagCount').text(count);
+                $('#bagCount2').text(count);
+                $('#bagCount3').text(count);
+            })
+</script>
+@endscript

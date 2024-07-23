@@ -37,7 +37,7 @@
 </head>
 <body class="" >
     <div id="wrapper" style="background: rgba(0, 0, 0, 0) linear-gradient(155deg, rgba(8, 46, 198, 0.15) 4%, rgba(200, 150, 0, 0.18) 96%) repeat scroll 0% 0% / cover">
-  @include('site.layouts.navbar')
+  @include('site.layout.navbar')
       <div class="container" id="" style="margin-top:6.9rem;height: auto;min-height: 260px">
           <section class="row ltr">
               <div class="card bg-transparent shadow-none col-md-9 col-sm-12" style="border: medium; background-size: cover;">

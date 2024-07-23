@@ -21,13 +21,15 @@ class CartService
         if (!is_null($object) && $object instanceof \Illuminate\Database\Eloquent\Model) {
             //merge item it self with additional value --mean may be we have book our product in out cart
             $value = array_merge($value, [
-                'id' => \Illuminate\Support\Str::random(10),
+//                'id' => \Illuminate\Support\Str::random(2),
+                'id' => rand(10000,99999),
                 'subject_id' => $object->id,
                 'subject_type' => get_class($object)
             ]);
         }elseif (! isset($value['id'])){
             $value = array_merge($value, [
-                'id' => \Illuminate\Support\Str::random(10),
+                'id' => rand(10000,99999),
+//                'id' => \Illuminate\Support\Str::random(10),
             ]);
         }
 
@@ -82,6 +84,12 @@ class CartService
 
         return $cart;
     }
+    public function isEmpty(){
+        $cart = $this->cart;
+        return $cart->isEmpty() ? true : false;
+    }
+
+
 
 //return total items price
     public function totalPrice(){

@@ -1,4 +1,4 @@
-@component('site.layouts.content',['title'=>'تایید شماره موبایل'])
+@component('site.layout.content',['title'=>'تایید شماره موبایل'])
     @slot('headerTitle')
         تایید شماره موبایل
     @endslot

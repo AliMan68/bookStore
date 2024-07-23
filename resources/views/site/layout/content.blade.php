@@ -6,8 +6,6 @@
 
 
 @section('content')
-
-
     <div class="card bg-transparent shadow-none col-md-12 col-sm-12" style="border:none ">
         <div class="d-flex mb-1 align-items-center justify-content-between">
             <div class="d-flex align-items-center justify-content-between w-100">

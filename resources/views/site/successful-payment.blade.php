@@ -1,4 +1,4 @@
-@component('site.layouts.content',['title'=>'پرداخت موفقیت آمیز'])
+@component('site.layout.content',['title'=>'پرداخت موفقیت آمیز'])
     @slot('headerTitle')
         پرداخت موفقیت آمیز
     @endslot

@@ -12586,3 +12586,21 @@ td button,a{
     position: fixed !important;
     right: 0px;
 }
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #000;
+    border-color: #000;
+    color: white !important;
+}
+.pagination {
+    display: -ms-flexbox;
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    border-radius: .25rem;
+    border: 1px solid black;
+}
+.page-link{
+    color: #000!important;
+}

@@ -4,57 +4,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title ?? 'App name' }}</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>{{ $title."-انتشارات دانشگاه" ?? 'انتشارات دانشگاه' }}</title>
+
+    <link rel="stylesheet" type="text/css" href="{{asset('site-css/swiper.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('site-css/bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('site-css/bootstrap-grid.min.css')}}" >
+    <link rel="stylesheet" type="text/css" href="{{asset('site-css/bootstrap-reboot.min.css')}}" >
+    <link rel="stylesheet" type="text/css" href="{{asset('site-css/animate.css')}}" >
+    <link rel="stylesheet" type="text/css" href="{{asset('site-css/owl.carousel.css')}}"  >
+    <link rel="stylesheet" type="text/css" href="{{asset('site-css/owl.theme.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('site-css/owl.transitions.css')}}" >
+    <link rel="stylesheet" type="text/css" href="{{asset('site-css/magnific-popup.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('site-css/jquery.countdown.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('site-css/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('site-css/select/select2.css')}}" >
+    <link rel="stylesheet" type="text/css" href="{{asset('site-css/vendors-rtl.min.css')}}" >
+    <link rel="stylesheet" type="text/css" href="{{asset('site-css/persian-datepicker.min.css')}}" >
+    <link rel="stylesheet" type="text/css" href="{{asset('site-css/jquery.dataTables.min.css')}}" >
+    <link rel="stylesheet" type="text/css" href="{{asset('site-css/buttons.dataTables.min.css')}}" >
+    <link rel="stylesheet" type="text/css" href="{{asset('site-css/owl.carousel.css')}}"  >
+    <!-- color scheme -->
+    <link id="colors" href="{{asset('site-css/colors/scheme-01.css')}}" rel="stylesheet" type="text/css" >
+    <link rel="stylesheet" type="text/css" href="{{asset('site-css/coloring.css')}}" />
+    @yield('style')
 </head>
 
 <body>
-<div id="" class="antialiased" style="">
+<div id="wrapper" class="horizontal-layout horizontal-menu content-detached-left-sidebar ecommerce-application navbar-floating footer-static " data-open="hover" data-menu="horizontal-menu" data-col="2-columns" style="min-height: 900px;background: rgba(0, 0, 0, 0) linear-gradient(155deg, rgba(8, 46, 198, 0.15) 4%, rgba(200, 150, 0, 0.18) 96%) repeat scroll 0% 0% / cover;">
+    @include('site.layout.navbar')
+    <livewire:card-modal/>
 
-
-    <nav class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
-        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-            <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-                <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo">
-                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
-            </a>
-            <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Get started</button>
-                <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
-                    <span class="sr-only">Open main menu</span>
-                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-                    </svg>
-                </button>
-            </div>
-            <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
-                <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                    <li>
-                        <a wire:navigate href="{{url('/')}}" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent  md:p-0 {{ (request()->is('/')) ? 'text-blue-700'  :'' }}" >New TODO</a>
-                    </li>
-                    <li>
-                        <a wire:navigate href="{{url('/todo-list')}}" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Todo List</a>
-                    </li>
-                    <li>
-                        <a wire:navigate href="{{url('/contact-us')}}"  class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700  md:dark:hover:bg-transparent dark:border-gray-700 {{ (request()->is('/contact-us')) ? 'text-blue-700'  :'' }}" >Contact Us</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
     {{$slot}}
-
-    {{--    <div class="flex">--}}
-    {{--        <div class="w-2/4 px-5">--}}
-    {{--            <livewire:todo-list lazy search="date('Y')"/>--}}
-    {{--        </div>--}}
-    {{--        <div class="w-2/4 px-5">--}}
-    {{--            <livewire:todo-form/>--}}
-    {{--        </div>--}}
-    {{--    </div>--}}
-
 </div>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<x-livewire-alert::scripts />
+    @include('site.layout.footer')
+
 
 </body>
+{{--<script>--}}
+{{--    $(window).load(function() {--}}
+{{--    --}}
+{{--        $('#navigation-menu').addClass("smaller")--}}
+{{--    });--}}
+{{--</script>--}}
+
+
+<script src="{{asset('site-js/jquery.min.js')}}"></script>
+<script src="{{asset('site-js/bootstrap.min.js')}}"></script>
+<script src="{{asset('site-js/wow.min.js')}}"></script>
+<script src="{{asset('site-js/jquery.isotope.min.js')}}"></script>
+<script src="{{asset('site-js/easing.js')}}"></script>
+<script src="{{asset('site-js/owl.carousel.js')}}"></script>
+<script src="{{asset('site-js/validation.js')}}"></script>
+<script src="{{asset('site-js/jquery.magnific-popup.min.js')}}"></script>
+<script src="{{asset('site-js/enquire.min.js')}}"></script>
+<script src="{{asset('site-js/jquery.stellar.min.js')}}"></script>
+<script src="{{asset('site-js/jquery.plugin.js')}}"></script>
+<script src="{{asset('site-js/typed.js')}}"></script>
+<script src="{{asset('site-js/jquery.countTo.js')}}"></script>
+<script src="{{asset('site-js/jquery.countdown.js')}}"></script>
+<script src="{{asset('site-js/design.js')}}"></script>
+
+<script src="{{asset('site-js/owl.carousel.js')}}"></script>
+
+
+
+
+<script  src="{{asset('site-js/swiper.min.js')}}"></script>
+<script src="{{asset('site-js/swiper2.min.js')}}"></script>
+
+<script src="{{asset('site-js/swiper3.js')}}"></script>
+{{--<script>--}}
+
+{{--    $(window).load(function() {--}}
+
+{{--    });--}}
+{{--    $('#category').select2()--}}
+{{--    $('#bookSection').select2()--}}
+{{--    $('#bookTranslator').select2()--}}
+{{--    $('#bookWriter').select2()--}}
+{{--    function toggleFilters() {--}}
+{{--        $('#filter-column').toggleClass('d-none')--}}
+{{--    }--}}
+{{--</script>--}}
+
+{{--<script>--}}
+{{--    (function ($) {--}}
+{{--        $(document).ready(function () {--}}
+{{--            $(function() {--}}
+{{--                $('.date-picker').persianDatepicker({--}}
+{{--                    formatDate: "YYYY/0M/0D"--}}
+{{--                });--}}
+{{--            });--}}
+{{--        });--}}
+{{--    })--}}
+
+
+
+{{--</script>--}}
+
+
+
+
 
 </html>

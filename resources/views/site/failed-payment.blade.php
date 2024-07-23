@@ -1,4 +1,4 @@
-@component('site.layouts.content',['title'=>'خطا در پرداخت'])
+@component('site.layout.content',['title'=>'خطا در پرداخت'])
     @slot('headerTitle')
         خطا در پرداخت
     @endslot

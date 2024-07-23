@@ -1,11 +1,11 @@
-@component('site.layouts.content',['title'=>'بازیابی رمز عبور'])
+@component('site.layout.content',['title'=>'بازیابی رمز عبور'])
     @slot('headerTitle')
         تایید شماره موبایل
     @endslot
     <!--begin::Content-->
     <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
         <!--begin::Logo-->
-      
+
         <!--end::Logo-->
         <!--begin::Wrapper-->
         <div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
@@ -28,13 +28,13 @@
                     <h5 class="text-dark mb-3">شماره موبایل ثبت نامی خود را وارد نمایید</h5>
                     <!--end::Title-->
                     <!--begin::Link-->
-                    
+
                     <!--end::Link-->
                 </div>
                 <!--begin::Heading-->
                 <!--begin::Input group-->
                 <div class="fv-row mb-10">
-                   
+
                     <input class="form-control form-control-solid" type="text" placeholder="09000000000" name="mobile" autocomplete="off" />
                 </div>
                 <!--end::Input group-->
@@ -50,7 +50,7 @@
                             </div>
                     <!--end::Wrapper-->
                     <!--begin::Input-->
-                    
+
                     <!--end::Input-->
                 </div>
                 <!--end::Input group-->

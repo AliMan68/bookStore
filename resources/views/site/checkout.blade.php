@@ -37,7 +37,7 @@
 
 
 <div id="wrapper" class="" style="min-height:900px;background: rgba(0, 0, 0, 0) linear-gradient(155deg, rgba(8, 46, 198, 0.15) 4%, rgba(200, 150, 0, 0.18) 96%) repeat scroll 0% 0% / cover;padding-bottom: 100px !important;}">
-@include('site.layouts.navbar')
+@include('site.layout.navbar')
 <!-- content begin -->
 
     @if(count($cart) > 0 )
@@ -326,8 +326,8 @@
 
                 <div class="d-flex align-items-center justify-content-center">
                     <h5 class="mt-1">رفتن به :</h5>
-                    <a href="{{route('index')}}" class="mx-3">  صفحه نخست |</a>
-                    <a href="{{route('books.index')}}" > لیست کتاب‌ها </a>
+                    <a href="{{route('index')}}" class="mx-3" wire:navigate>  صفحه نخست |</a>
+                    <a href="{{route('books.index')}}" wire:navigate > لیست کتاب‌ها </a>
 
                 </div>
             </div>

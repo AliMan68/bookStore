@@ -1,10 +1,7 @@
-@component('site.layout.content',['title'=>' جزییات خبر'])
-    @slot('headerTitle')
-        جزییات خبر {{$news->title}}
-    @endslot
+<div class="container" id="" style="margin-top:6.9rem;height: auto;min-height: 260px">
     <ul class="breadcrumb d-none d-md-block text-right">
-        <li class="breadcrumb-item"><a href="{{url('/')}}">خانه</a></li>
-        <li class="breadcrumb-item"><a href="{{route('news.index')}}">اخبار و اطلاعیه‌ها</a></li>
+        <li class="breadcrumb-item"><a wire:navigate href="{{url('/')}}">خانه</a></li>
+        <li class="breadcrumb-item"><a wire:navigate href="{{route('news.index')}}">اخبار و اطلاعیه‌ها</a></li>
         <li class="breadcrumb-item active">{{$news->title}}</li>
     </ul>
     <div class="row mt-2" style="direction: rtl">
@@ -63,24 +60,12 @@
         </div>
     </div>
 
-    @slot('script')
-        <script>
-            $(window).load(function() {
-                $('#navigation-menu').addClass("smaller")
-            });
+</div>
 
-            $("#comment-btn").click(function() {
-                // console.log($("#customers").offset().top)
-                $('html, body').animate({
-                    scrollTop: $("#comments").offset().top - 140
-                }, 1333);
-            });
-            $("#about").click(function() {
-                // console.log($("#customers").offset().top)
-                $('html, body').animate({
-                    scrollTop: $("#about-book").offset().top - 140
-                }, 1333);
-            });
-        </script>
-    @endslot
-@endcomponent
+@script
+<script>
+    document.addEventListener('livewire:navigated', () => {
+        $('#navigation-menu').addClass("smaller")
+    });
+</script>
+@endscript

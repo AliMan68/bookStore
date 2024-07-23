@@ -1,4 +1,4 @@
-@component('site.layouts.content',['title'=>'ورود|ثبت نام'])
+@component('site.layout.content',['title'=>'ورود|ثبت نام'])
     @slot('headerTitle')
         ورود|ثبت نام
     @endslot

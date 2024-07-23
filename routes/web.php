@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/',[App\Http\Controllers\HomeController::class,'index'])->name('index');
+//Route::get('/',[App\Http\Controllers\HomeController::class,'index'])->name('index');
+Route::get('/',\App\Livewire\Index::class)->name('index');
 //Route::get('/', function () {
 //
 
@@ -58,9 +59,11 @@ Route::prefix('auth')->middleware('guest')->group(function (){
     Route::post('/reset-password/reset', [ResetPasswordController::class, 'reset'])->name('reset-password.reset');
 });
 
-Route::get('/books/index',[App\Http\Controllers\Site\BookController::class,'index'])->name('books.index');
+//Route::get('/books/index',[App\Http\Controllers\Site\BookController::class,'index'])->name('books.index');
+Route::get('/books/index',\App\Livewire\Books::class)->name('books.index');
 Route::get('/nav/search',[App\Http\Controllers\Site\BookController::class,'index'])->name('nav.search');
-Route::get('/books/{book}/details',[App\Http\Controllers\Site\BookController::class,'bookItem'])->name('book.details');
+//Route::get('/books/{book}/details',[App\Http\Controllers\Site\BookController::class,'bookItem'])->name('book.details');
+Route::get('/books/{book}/details',\App\Livewire\BookDetails::class)->name('book.details');
 Route::post('/send/comment',[App\Http\Controllers\Book\CommentController::class,'sendComment'])->name('send.comment');
 
 //cart
@@ -83,8 +86,10 @@ Route::get('/auth/logout',function (){
     return redirect(route('index'));
 })->name('auth.logout');
 
-Route::get('/news/{news}/details',[App\Http\Controllers\Admin\NewsController::class,'show'])->name('news.details');
-Route::get('/news',[App\Http\Controllers\Admin\NewsController::class,'allNews'])->name('news.index');
+//Route::get('/news/{news}/details',[App\Http\Controllers\Admin\NewsController::class,'show'])->name('news.details');
+Route::get('/news/{news}/details',\App\Livewire\NewsDetails::class)->name('news.details');
+//Route::get('/news',[App\Http\Controllers\Admin\NewsController::class,'allNews'])->name('news.index');
+Route::get('/news',\App\Livewire\AllNews::class)->name('news.index');
 
 
 //payments

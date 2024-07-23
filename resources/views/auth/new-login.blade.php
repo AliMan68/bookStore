@@ -1,4 +1,4 @@
-@component('site.layouts.content',['title'=>'ورود|ثبت نام'])
+@component('site.layout.content',['title'=>'ورود|ثبت نام'])
     @slot('headerTitle')
         ورود|ثبت نام
     @endslot
@@ -23,11 +23,13 @@
                                 <input type="password" name="password" class="form-control " id="" placeholder="رمز عبور" style="min-height: 50px; border: 1px gray solid;text-align: center;font-size: 14px;max-width: 330px;border-radius: 10px;-webkit-box-shadow: inset 0 0 0 30px #fff !important;padding: 19px 20px;"  required>
                             </div>
                              <div class="form-group">
-                                <div class="d-flex flex-row align-items-center justify-content-between" id="captchaContainer">
-                                @captcha
-                                    <button type="button" class="btn btn-info btn-sm" onclick="$('#captchaContainer>img').attr('src','https://press.persiandade.ir/captcha/image?_=1267098935&amp;_='+Math.random());var captcha=document.getElementById('captcha');if(captcha){captcha.focus()}"> <i class="feather icon-refresh-cw"></i> </button>
-                                </div>
-                                <input type="text" id="captcha" name="captcha" autocomplete="off" class="form-control mt-2">
+                                    <div class="d-flex flex-row align-items-center justify-content-between" id="captchaContainer">
+{{--                                        @captcha--}}
+                                        <img src="{{ captcha_src('flat') }}" onclick="this.src='/captcha/default?'+Math.random()"  alt="captcha" id="captchaCode" >
+{{--                                        <button type="button" class="btn btn-info btn-sm" onclick="$('#captchaContainer>img').attr('src','https://press.persiandade.ir/captcha/image?_=1267098935&amp;_='+Math.random());var captcha=document.getElementById('captcha');if(captcha){captcha.focus()}"> <i class="feather icon-refresh-cw"></i> </button>--}}
+                                        <a type="button" href="javascript:;" class="btn btn-info btn-sm" onclick="document.getElementById('captchaCode').src='/captcha/default?'+Math.random()"> <i class="feather icon-refresh-cw"></i> </a>
+                                    </div>
+                                    <input type="text" id="captcha" name="captcha" autocomplete="off" class="form-control mt-2">
                             </div>
 
                         </div>
@@ -38,11 +40,11 @@
                         </div>
 
                         <div class="col-md-12 d-flex w-100 align-items-center justify-content-center mt-3">
-                            <h5 style="text-align: right;font-weight: 500">حساب کاربری ندارید؟ <a href="{{route('register.mobile')}}">ثبت‌ نام</a></h5>
+                            <h5 style="text-align: right;font-weight: 500">حساب کاربری ندارید؟ <a href="{{route('register.mobile')}}" wire:navigate>ثبت‌ نام</a></h5>
                         </div>
 
                         <div class="col-md-12 d-flex w-100 align-items-center justify-content-center mt-3">
-                            <a href="{{route('reset-password.form')}}" style="font-size: 13px">فراموشی رمز عبور</a>
+                            <a href="{{route('reset-password.form')}}" style="font-size: 13px" wire:navigate>فراموشی رمز عبور</a>
                         </div>
 
 
@@ -53,13 +55,10 @@
                                 <div class="bounce3"></div>
                             </div>
                         </div>
-
-
                     </div>
                 </form>
             </div>
         </div>
-
         <div id="confirmCode" class="d-none">
             <div  class="d-flex flex-column w-100 h-100 ">
                 <h style="text-align: center;font-size: 2rem;font-weight: 600;padding-bottom: 20px;color: black" id="login-title">
