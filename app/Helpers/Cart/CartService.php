@@ -81,7 +81,6 @@ class CartService
         $cart = $cart->map(function ($item){
             return $this->withRelationIfExist($item);
         });
-
         return $cart;
     }
     public function isEmpty(){
@@ -93,6 +92,7 @@ class CartService
 
 //return total items price
     public function totalPrice(){
+        $postPrice = \App\Models\Setting::latest()->first()->post_price ?? 0;
         $cart = $this->cart;
         $cart = $cart->map(function ($item){
             return $this->withRelationIfExist($item);
@@ -100,7 +100,7 @@ class CartService
         $totalPrice = $cart->sum(function ($item){
             return $item['quantity'] * ($item['book']->price - (($item['book']->price * $item['book']->discount_percent/100)));
         });
-        return $totalPrice;
+        return $totalPrice + $postPrice;
 
     }
 

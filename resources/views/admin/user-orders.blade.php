@@ -183,7 +183,12 @@
                         @endif
                     @endforeach
                 @endif
-            {{$orders->render()}}
+{{--            {{$orders->render()}}--}}
+                <div class="col-12">
+                    <div class="card-footer">
+{{--                        {{$orders->render(['search'=>request('search')])->render('pagination::bootstrap-4')}}--}}
+                    </div>
+                </div>
         </div>
     </div>
     @slot('style')

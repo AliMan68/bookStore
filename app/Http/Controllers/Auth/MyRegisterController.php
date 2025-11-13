@@ -19,6 +19,7 @@ class MyRegisterController extends Controller
   }
 
   public function sendCode(Request $request){
+      
       $request = request();
       $this->validate($request, [
           'captcha' => 'required|captcha'

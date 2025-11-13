@@ -33,7 +33,7 @@ Route::get('/my-orders',[App\Http\Controllers\OrderController::class,'userOrders
 Route::get('/order/{order}/payment',[App\Http\Controllers\OrderController::class,'payment'])->name('order.payment');
 Route::get('/orders',[App\Http\Controllers\OrderController::class,'index'])->name('orders');
 Route::post('/order/{order}/deliver',[App\Http\Controllers\OrderController::class,'deliverOrder'])->name('order.deliver');
-
+Route::get('/order/{order}/print',[App\Http\Controllers\OrderController::class,'printOrder'])->name('order.print');
 //
 Route::resource('users','\App\Http\Controllers\Admin\UserController');
 Route::get('/users/{user}/permissions/create',[App\Http\Controllers\Admin\UsersPermissionsController::class,'create'])->name('users.permissions.create');

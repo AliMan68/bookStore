@@ -2,9 +2,9 @@
 <html lang="zxx">
 <head>
     <meta charset="utf-8" />
-    <title>سبد خرید | انتشارات دانشگاه صنعتی شریف</title>
+    <title>سبد خرید | {{\App\Models\Setting::latest()->first()->system_name ?? ''}}</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta name="description" content="انتشارات دانشگاه صنعتی شریف"  />
+    <meta name="description" content="{{\App\Models\Setting::latest()->first()->system_name ?? ''}}"  />
     <meta  name="keywords" content="سبد خرید"/>
     <meta  name="author" content="پرشین داده - persiandade.ir"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -69,7 +69,10 @@
                             </div>
                             <div style="max-height: 550px;overflow-x: hidden;overflow-y: scroll">
                                 @php
+                                $postPrice = \App\Models\Setting::latest()->first()->post_price;
                                     $totalPrice = 0;
+                                    $booksPrice = 0;
+
 
                                 @endphp
                                 @foreach($cart as $product)
@@ -79,6 +82,7 @@
                                             $book = $product['book'];
                                             $quantity = $product['quantity'];
                                             $totalPrice = $totalPrice + ($book->price - ($book->price * $book->discount_percent/100)) * $quantity;
+                                            $booksPrice = $totalPrice;
                                         @endphp
                                         <div class="card" style="border: none">
                                             <div class="card-content row" style="direction: rtl">
@@ -134,6 +138,7 @@
                                         <hr class="my-1 {{$loop->last ? 'd-none':''}}" >
                                     @endif
                                 @endforeach
+                                @php($totalPrice = $totalPrice+$postPrice)
                             </div>
                             <hr class="my-1" id="nextSub">
                         </fieldset>
@@ -250,7 +255,7 @@
                                     مجموع قیمت :
                                 </p>
                                 <p class="text-dark" style="font-size: 14px;text-align: right" id="">
-                                    <span id="totalPrice4">{{number_format($totalPrice)}}</span>   تومان
+                                    <span id="totalPrice4">{{number_format($booksPrice)}}</span>   تومان
                                 </p>
 
                             </div>
@@ -268,7 +273,7 @@
                                     هزینه ارسال :
                                 </p>
                                 <p class="text-dark" style="font-size: 14px;text-align: right">
-                                    0 تومان
+                                    <span id="postPrice">{{number_format(\App\Models\Setting::latest()->first()->post_price ?? 0)}}</span> تومان
                                 </p>
 
                             </div>
@@ -589,6 +594,8 @@
 <script>
     function submitDiscountCode(code) {
         var code = $('#discount-code').val()
+        var postPrice = parseInt(numberWithoutCommas($('#postPrice').text()))
+        //remove postPrice from total and add it after discount
         var totalPrice = parseInt(numberWithoutCommas($('#totalPrice4').text()))
         console.log(totalPrice)
         {{--var totalPrice = {{$totalPrice}}--}}
@@ -615,10 +622,10 @@
                         // console.log(response.percent)
                         // console.log(totalPrice)
                         // console.log((totalPrice * response.percent / 100))
-                        $('#totalPrice').text(numberWithCommas(parseInt(totalPrice - (totalPrice * response.percent / 100))))
-                        $('#totalPrice2').text(numberWithCommas(parseInt(totalPrice - (totalPrice * response.percent / 100))))
+                        $('#totalPrice').text(numberWithCommas(parseInt(totalPrice - (totalPrice * response.percent / 100) + postPrice)))
+                        $('#totalPrice2').text(numberWithCommas(parseInt(totalPrice - (totalPrice * response.percent / 100) + postPrice)))
                         $('#totalPrice3').text(numberWithCommas(parseInt(totalPrice - (totalPrice * response.percent / 100))))
-                        $('#totalPrice4').text(numberWithCommas(parseInt(totalPrice - (totalPrice * response.percent / 100))))
+                        $('#totalPrice4').text(numberWithCommas(parseInt(totalPrice - (totalPrice * response.percent / 100) )))
                         $('#successMessage').addClass('left-zero')
                         setTimeout(function () {
                             $('#successMessage').removeClass("left-zero",1000, "easeInOutQuad");
@@ -681,8 +688,8 @@
                         $('#successMessage').text(response.message)
                         $('#totalPrice').text(response.total_price)
                         $('#totalPrice2').text(response.total_price)
-                        $('#totalPrice3').text(response.total_price)
-                        $('#totalPrice4').text(response.total_price)
+                        $('#totalPrice3').text(response.books_price)
+                        $('#totalPrice4').text(response.books_price)
                         $('#successMessage').addClass('left-zero')
                         $('#bookCount'+id).val(response.quantity)
                         setTimeout(function () {

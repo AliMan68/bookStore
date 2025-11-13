@@ -34,7 +34,6 @@
                             <td>{{$book->count}}</td>
                             <td>{{number_format($book->price)}}</td>
                             <td>{{$book->discount_percent}}</td>
-
                             <td>
                                 @if(strlen($book->image)<1)
                                     درج نشده
@@ -43,10 +42,183 @@
                                 @endif
                             </td>
                             <td>
-                                 <i class="feather icon-trash"  data-toggle="modal" data-target="#confirmModal{{$book->id}}" style="color: darkred;cursor: pointer;font-size: 15px"></i>
-                                <a href="{{route('admin.books.edit',$book->id)}}" class=""> <i class="feather icon-edit" style="font-size: 15px"></i></a>
+                                <i class="feather icon-trash" title="حذف"  data-toggle="modal" data-target="#confirmModal{{$book->id}}"  style="color: darkred;cursor: pointer;font-size: 15px"></i>
+                                <i class="feather icon-plus-circle" title="افزایش موجودی"   data-toggle="modal" data-target="#addStockModal{{$book->id}}" style="color: darkgreen;cursor: pointer;font-size: 15px"></i><br>
+                                <i class="feather icon-refresh-cw" title="تغییر دوره/سال نشر"   data-toggle="modal" data-target="#changeYearModal{{$book->id}}" style="color: grey;cursor: pointer;font-size: 15px"></i>
+                                <a href="{{route('admin.books.edit',$book->id)}}" class="" title="ویرایش اطلاعات"> <i class="feather icon-edit" style="font-size: 15px"></i></a>
                             </td>
                         </tr>
+                        <div class="modal fade " id="addStockModal{{$book->id}}" tabindex="-1" role="dialog" aria-labelledby="addStockModal{{$book->id}}" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+                                <div class="modal-content" style=" position: absolute;top: 30px;direction: rtl">
+                                    <div class="modal-header d-flex w-100 align-items-center justify-content-between">
+                                        <h5 class="modal-title" id="addStockModal">افزایش تعداد کتاب {{$book->title}}</h5>
+                                        <button type="button" class="bg-transparent" style="border: none" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body " style="color:black;">
+
+                                        <ul style="direction: rtl;text-align: right;font-size: 12px">
+                                            <h6>توجه</h6>
+                                            <li>
+                                                افزایش قیمت و تعداد فقط برای دوره/سال چاپ فعلی اعمال میگردد
+                                            </li>
+                                            <li>
+                                                با تغییر قیمت، قیمت جدید برای کتاب اعمال می‌گردد.
+                                            </li>
+                                            <li>
+                                                در صورتی که ورودی کتاب برای دوره/سال چاپ جدید می‌باشد، از گزینه <i class="feather icon-refresh-cw" style="color: grey;cursor: pointer;font-size: 15px"></i>  استفاده نمایید
+                                            </li>
+                                        </ul>
+                                        <form action="{{route('admin.books.destroy',$book->id)}}" method="post" style="direction: rtl;text-align: right">
+                                            @csrf
+                                            {{--                                            <div class="d-flex flex-column w-100 align-items-center justify-content-around">--}}
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="">تعداد :</label>
+                                                        <input type="number" id="bookCount" class="form-control required  number-divider" name="count"   value="" placeholder="عدد وارد نمایید" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label for="">قیمت(تومان) :</label>
+                                                        <input type="text" id="bookPrice" class="form-control required number-divider" name="price"  value="" placeholder="عدد وارد نمایید" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            {{--                                            </div>--}}
+
+                                            <div class="modal-footer">
+                                                <div class="d-flex w-100 align-items-center justify-content-around">
+
+
+
+
+                                                    <button class="btn btn-success"> <i class="feather icon-check-circle"></i> بله </button>
+                                                    @method('DELETE')
+
+
+                                                    <button href="" class="btn btn-danger" data-dismiss="modal" aria-label="Close"> <i class="feather icon-slash"></i> خیر </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="modal fade " id="changeYearModal{{$book->id}}" tabindex="-1" role="dialog" aria-labelledby="changeYearModal{{$book->id}}" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
+                                <div class="modal-content" style=" position: absolute;top: 30px;direction: rtl">
+                                    <div class="modal-header d-flex w-100 align-items-center justify-content-between">
+                                        <h5 class="modal-title" id="exampleModalCenterTitle">تغییر دوره/سال چاپ کتاب{{$book->title}}</h5>
+                                        <button type="button" class="bg-transparent" style="border: none" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body " style="color:black;">
+
+                                        <ul style="direction: rtl;text-align: right;font-size: 12px">
+                                            <h6>توجه</h6>
+                                            <li>
+                                                با تغییر دوره/سال چاپ کتاب، قیمت موجودی فعلی نیز بروز می‌شود
+                                            </li>
+                                            <li>
+                                                در صورتی که دوره/سال چاپ تغییر نداشته و فقط افزایش موجودی دارید، از گزینه <i class="feather icon-plus-circle" style="color: darkgreen;cursor: pointer;font-size: 15px"></i>  استفاده نمایید
+                                            </li>
+                                        </ul>
+                                        <form action="{{route('admin.books.destroy',$book->id)}}" method="post" style="direction: rtl;text-align: right">
+                                            @csrf
+{{--                                            <div class="d-flex flex-column w-100 align-items-center justify-content-around">--}}
+                                                <div class="row">
+
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label for="bookTurn">نوبت چاپ :</label>
+                                                            <select name="credits" id="bookTurn" class="form-control">
+                                                                <option value="اول">اول</option>
+                                                                <option value="دوم">دوم</option>
+                                                                <option value="سوم">سوم</option>
+                                                                <option value="چهار">چهار</option>
+                                                                <option value="پنجم">پنجم</option>
+                                                                <option value="ششم">ششم</option>
+                                                                <option value="هفتم">هفتم</option>
+                                                                <option value="هشتم">هشتم</option>
+                                                                <option value="نهم">نهم</option>
+                                                                <option value="دهم">دهم</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label for="book_year">سال چاپ :</label>
+                                                            <select name="book_year" id="book_year" class="form-control">
+                                                                <option value="1384">1384</option>
+                                                                <option value="1385">1385</option>
+                                                                <option value="1386">1386</option>
+                                                                <option value="1387">1387</option>
+                                                                <option value="1389">1389</option>
+                                                                <option value="1390">1390</option>
+                                                                <option value="1391">1391</option>
+                                                                <option value="1392">1392</option>
+                                                                <option value="1393">1393</option>
+                                                                <option value="1394">1394</option>
+                                                                <option value="1395">1395</option>
+                                                                <option value="1396">1396</option>
+                                                                <option value="1397">1397</option>
+                                                                <option value="1398">1398</option>
+                                                                <option value="1399">1399</option>
+                                                                <option value="1400">1400</option>
+                                                                <option value="1401">1401</option>
+                                                                <option value="1402">1402</option>
+                                                                <option value="1403">1403</option>
+                                                                <option value="1404">1404</option>
+                                                                <option value="1405">1405</option>
+                                                                <option value="1406">1406</option>
+                                                                <option value="1407">1407</option>
+                                                                <option value="1408">1408</option>
+                                                                <option value="1409">1409</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label for="">تعداد :</label>
+                                                            <input type="number" id="bookCount" class="form-control required  number-divider" name="count"   value="" placeholder="عدد وارد نمایید" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label for="">قیمت(تومان) :</label>
+                                                            <input type="text" id="bookPrice" class="form-control required number-divider" name="price"  value="" placeholder="عدد وارد نمایید" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+{{--                                            </div>--}}
+
+                                        <div class="modal-footer">
+                                        <div class="d-flex w-100 align-items-center justify-content-around">
+
+
+
+
+                                                <button class="btn btn-success"> <i class="feather icon-check-circle"></i> بله </button>
+                                                @method('DELETE')
+
+
+                                            <button href="" class="btn btn-danger" data-dismiss="modal" aria-label="Close"> <i class="feather icon-slash"></i> خیر </button>
+                                        </div>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
                         <div class="modal fade " id="confirmModal{{$book->id}}" tabindex="-1" role="dialog" aria-labelledby="confirmModal{{$book->id}}" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
                                 <div class="modal-content" style=" position: absolute;top: 30px;direction: rtl">

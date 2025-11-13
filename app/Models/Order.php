@@ -31,7 +31,7 @@ class Order extends Model
     }
 
     public function books(){
-        return $this->belongsToMany(Book::class)->withPivot('quantity','price');
+        return $this->belongsToMany(Book::class)->withPivot('quantity','price','book_year','credits');
     }
 
     public function payments(){

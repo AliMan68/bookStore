@@ -68,7 +68,7 @@
                                             </div>
                                             <a href="{{route('book.details',$book)}}" wire:navigate>
                                                 <div class="text">
-                                                    کتاب {{$book->title}} اثر
+                                                     {{$book->title}} اثر
 
                                                     @foreach ($book->authors as $author)
                                                         {{$author->title}} -
@@ -93,6 +93,7 @@
                                     </div>
                                 @endforeach
                             </div>
+{{--                            {{$books->links()}}--}}
                         </div>
                     </div>
                 </div>

@@ -128,19 +128,65 @@
                         </div>
                     </div>
                     <div class="divider"></div>
-                    <div class="col-md-4 col-sm-12">
+                    <div class="col-md-3 col-sm-12">
                         <div class="form-group">
                             <label for="bookNum">شمارگان-تیتراژ :</label>
                             <input type="text" id="bookNum" class="form-control " name="published"  value="{{$book->published}}" placeholder="اختیاری" >
                         </div>
                     </div>
-                    <div class="col-md-4 col-sm-12">
+
+
+                    <div class="col-md-3 col-sm-12">
                         <div class="form-group">
-                            <label for="bookTurn">نوبت چاپ :</label>
-                            <input type="text" id="bookTurn" class="form-control " name="credits"  value="{{$book->credits}}" placeholder="اختیاری" >
+                            <label for="book_year">سال چاپ :</label>
+                            <select name="book_year" id="book_year" class="form-control">
+                                <option value="1384" @if($book->book_year == 1384) selected @endif>1384</option>
+                                <option value="1385" @if($book->book_year == 1385) selected @endif>1385</option>
+                                <option value="1386" @if($book->book_year == 1386) selected @endif>1386</option>
+                                <option value="1387" @if($book->book_year == 1387) selected @endif>1387</option>
+                                <option value="1389" @if($book->book_year == 1389) selected @endif>1389</option>
+                                <option value="1390" @if($book->book_year == 1390) selected @endif>1390</option>
+                                <option value="1391" @if($book->book_year == 1391) selected @endif>1391</option>
+                                <option value="1392" @if($book->book_year == 1392) selected @endif>1392</option>
+                                <option value="1393" @if($book->book_year == 1393) selected @endif>1393</option>
+                                <option value="1394" @if($book->book_year == 1394) selected @endif>1394</option>
+                                <option value="1395" @if($book->book_year == 1395) selected @endif>1395</option>
+                                <option value="1396" @if($book->book_year == 1396) selected @endif>1396</option>
+                                <option value="1397" @if($book->book_year == 1397) selected @endif>1397</option>
+                                <option value="1398" @if($book->book_year == 1398) selected @endif>1398</option>
+                                <option value="1399" @if($book->book_year == 1399) selected @endif>1399</option>
+                                <option value="1400" @if($book->book_year == 1400) selected @endif>1400</option>
+                                <option value="1401" @if($book->book_year == 1401) selected @endif>1401</option>
+                                <option value="1402" @if($book->book_year == 1402) selected @endif>1402</option>
+                                <option value="1403" @if($book->book_year == 1403) selected @endif>1403</option>
+                                <option value="1404" @if($book->book_year == 1404) selected @endif>1404</option>
+                                <option value="1405" @if($book->book_year == 1405) selected @endif>1405</option>
+                                <option value="1406" @if($book->book_year == 1406) selected @endif>1406</option>
+                                <option value="1407" @if($book->book_year == 1407) selected @endif>1407</option>
+                                <option value="1408" @if($book->book_year == 1408) selected @endif>1408</option>
+                                <option value="1409" @if($book->book_year == 1409) selected @endif>1409</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="col-md-4 col-sm-12">
+                    <div class="col-md-3 col-sm-12">
+                        <div class="form-group">
+                            <label for="bookTurn">نوبت چاپ :</label>
+                            <select name="credits" id="bookTurn" class="form-control">
+                                <option value="اول" @if($book->credits == "اول") selected @endif>اول</option>
+                                <option value="دوم" @if($book->credits == "دوم") selected @endif>دوم</option>
+                                <option value="سوم" @if($book->credits == "سوم") selected @endif>سوم</option>
+                                <option value="چهار" @if($book->credits == "چهار") selected @endif>چهار</option>
+                                <option value="پنجم" @if($book->credits == "پنجم") selected @endif>پنجم</option>
+                                <option value="ششم" @if($book->credits == "ششم") selected @endif>ششم</option>
+                                <option value="هفتم" @if($book->credits == "هفتم") selected @endif>هفتم</option>
+                                <option value="هشتم" @if($book->credits == "هشتم") selected @endif>هشتم</option>
+                                <option value="نهم" @if($book->credits == "نهم") selected @endif>نهم</option>
+                                <option value="دهم" @if($book->credits == "دهم") selected @endif>دهم</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-sm-12">
                         <div class="form-group">
                             <label for="bookFrost">فروست انتشار :</label>
                             <input type="text" id="bookFrost" class="form-control " name="publication_frost"  value="{{$book->publication_frost}}" placeholder="اختیاری" >

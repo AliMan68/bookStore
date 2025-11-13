@@ -74,6 +74,9 @@ class OrderController extends Controller
 
         return view('admin.orders.index',compact('orders'));
     }
+    public function printOrder(Order $order){
+        return view('admin.print',compact('order'));
+    }
 
     public function deliverOrder(Request $request,Order $order){
 

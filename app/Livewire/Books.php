@@ -10,6 +10,7 @@ use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
+use Livewire\WithPagination;
 
 #[Layout('site.layout.app')]
 #[Title('همه کتاب‌ها')]
@@ -23,6 +24,7 @@ class Books extends Component
     public $categories = [];
     public $authors = [];
     public $translators = [];
+    use WithPagination;
 
     public function render()
     {
@@ -57,7 +59,7 @@ class Books extends Component
 
 
 
-        $books = $books->where('count','>','0')->get();
+        $books = $books->where('count','>','0')->paginate(20);
 
 
         return view('livewire.books',compact('books','categories_id','translators_id','authors_id','title','pricing'));

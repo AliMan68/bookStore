@@ -15,5 +15,6 @@ class Setting extends Model
         'address',
         'phone',
         'email',
+        'post_price',
     ];
 }

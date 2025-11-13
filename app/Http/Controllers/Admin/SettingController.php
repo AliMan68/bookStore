@@ -30,13 +30,16 @@ class SettingController extends Controller
             return back()->with('fail',$validated_data->errors());
         }
 //        Setting::truncate();
-        Setting::create([
+
+        $setting = Setting::create([
             'system_name'=>$request->system_name,
             'persons'=>$request->persons,
             'address'=>$request->address,
             'phone'=>$request->phone,
             'email'=>$request->email,
+            'post_price'=>$request->post_price,
         ]);
+
         return back()->with('success','تغییرات با موفقیت اعمال شد');
     }
 }

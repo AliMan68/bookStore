@@ -13,14 +13,6 @@
                 <p style="text-align: center;font-size: 13px;font-weight: 500;padding-bottom: 10px;color: black" class="">
                     .کد دریافتی را وارد نمایید
                 </p>
-
-{{--                <p style="text-align: center;font-size: 14px;font-weight: 500;padding-bottom: 10px;color: darkcyan;cursor:pointer;" onclick="editNumber()" >--}}
-{{--                    ویرایش شماره--}}
-{{--                    <span id="numberContainer"></span>--}}
-
-{{--                    <i class="feather icon-edit"></i>--}}
-{{--                </p>--}}
-
                 <form class="form" method="post" action="{{route('register.verify-mobile')}}">
                     @csrf
                     <input type="hidden" name="mobile" value="{{$mobile}}" >

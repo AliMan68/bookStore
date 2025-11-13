@@ -51,7 +51,8 @@ class CartController extends Controller
         if (Cart::has($data['id'])){
             Cart::update($data['id'],$data);
             $totalPrice= number_format(Cart::totalPrice());
-            return response(['status' => 'success','message'=>'تعداد با موفقیت بروز شد','quantity'=>$orderCount,'total_price'=>$totalPrice]);
+            $booksPrice = number_format(Cart::totalPrice() - \App\Models\Setting::latest()->first()->post_price ?? 0);
+            return response(['status' => 'success','message'=>'تعداد با موفقیت بروز شد','quantity'=>$orderCount,'total_price'=>$totalPrice, 'books_price'=>$booksPrice]);
         }
         return response(['status' => 'error','message'=>'محصول در سید خرید یافت نشد!'],404);
 

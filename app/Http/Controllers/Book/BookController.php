@@ -8,6 +8,7 @@ use App\Models\Book;
 use App\Models\Category;
 use App\Models\Translator;
 use Illuminate\Http\Request;
+use function PHPUnit\Framework\isNull;
 
 class BookController extends Controller
 {
@@ -67,6 +68,8 @@ class BookController extends Controller
             'image'=> uploadFile($request->file('image')),
             'attachment'=> uploadFile($request->file('attachment')),
             'discount_percent'=>$request->discount_percent,
+            'credits'=>$request->credits,
+            'book_year'=>$request->book_year,
             'page_count'=>$request->page_count,
             'editor'=>$request->editor,
             'isbn'=>$request->isbn,
@@ -124,13 +127,16 @@ class BookController extends Controller
             'price'=>['required','max:256'],
             'count'=>['required'],
         ]);
+//        dd(is_null($book->image));
         $book->update([
             'title'=>$data['title'],
             'price'=>str_replace( ',', '',$data['price']),
             'count'=>$data['count'],
-            'image'=> uploadFile($request->file('image')),
+            'image'=> is_null($book->image) ? uploadFile($request->file('image')) : $book->image,
             'attachment'=> uploadFile($request->file('attachment')),
             'discount_percent'=>$request->discount_percent,
+            'credits'=>$request->credits,
+            'book_year'=>$request->book_year,
             'page_count'=>$request->page_count,
             'editor'=>$request->editor,
             'isbn'=>$request->isbn,

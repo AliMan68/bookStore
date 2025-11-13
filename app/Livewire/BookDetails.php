@@ -37,7 +37,9 @@ class BookDetails extends Component
             Cart::put([
                 'id'=>'1',
                 'quantity'=>1,
-                'price'=>$book->price
+                'price'=>$book->price,
+                'book_year'=>$book->book_year,
+                'credits'=>$book->credits
             ],$book) ;
 
 //            return back()->with('success','کتاب با موفقیت به سبد خرید اضافه شد');

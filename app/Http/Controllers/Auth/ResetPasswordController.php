@@ -56,18 +56,20 @@ class ResetPasswordController extends Controller
 
 
     public function reset(Request $request){
+
         $mobile = $request->mobile;
         $code = $request->code;
 
         $result = VerificationCode::validateCode($mobile, $code);
         if ($result == false)
-            return back()->with('fail', 'کد وارد شده اشتباه است');
-
+//            return back()->with('fail', 'کد وارد شده اشتباه است');
+            return redirect(route('reset-password.form'))->with('fail', 'کد وارد شده اشتباه است');
         $user = findDuplicateUser($mobile);
         if (is_null($user))
             return redirect(route('reset-password.form'))->with('fail', 'کاربر یافت نشد');
         $user->password = Hash::make($user->mobile);
         $user->save();
+
         return redirect(route('auth.loginForm'))->with('success', 'رمز شما با موفقیت به شماره موبایل شما تغییر یافت');
 
     }

@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Book;
 use App\Models\Category;
 use Livewire\Component;
+use Livewire\WithPagination;
 use function PHPUnit\Framework\isNull;
 
 class IndexSearch extends Component
@@ -12,6 +13,8 @@ class IndexSearch extends Component
 
     public $title;
     public $category;
+
+//    use WithPagination;
 
     public function search(){
 
@@ -22,7 +25,7 @@ class IndexSearch extends Component
     public function render()
     {
 
-        $books = Book::where('count','>','0')->orderBy('id', 'desc')->paginate(50);
+        $books = Book::where('count','>','0')->orderBy('id', 'desc')->paginate(20);
 
         if (!is_null($this->category)){
             $books = $this->category->books()->get();

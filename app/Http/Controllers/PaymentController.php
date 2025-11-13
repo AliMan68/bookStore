@@ -31,16 +31,22 @@ class PaymentController extends Controller
         }
 
         $cardItems = Cart::all();
+
         $totalPrice = Cart::totalPrice();
+        $postPrice = \App\Models\Setting::latest()->first()->post_price ?? 0;
+            $booksPrice = $totalPrice - $postPrice;
         //validate discount code and  calculate total price
         $discountCodeId = null;
         if (!is_null($request->discount_code_value)){
             //extract code from DB
             $discountCodeId = DiscountCode::where('code',$request->discount_code_value)->first()->id;
             $discountCodePercent = DiscountCode::where('code',$request->discount_code_value)->first()->percent;
-            $totalPrice = $totalPrice - ($totalPrice * $discountCodePercent/100);
+            // calculate discount only for books not post price and add post price at the end
+            $totalPrice = $booksPrice - ($booksPrice * $discountCodePercent/100) + $postPrice;
         }
 
+        //convert tooman to rial
+        $totalPrice = $totalPrice * 10;
         $order = $request->user()->orders()->create([
             'price'=>$totalPrice,
             'status'=>'unpaid',
@@ -55,7 +61,7 @@ class PaymentController extends Controller
         ]);
 
         $products = $cardItems->mapWithKeys(function ($item){
-            return [$item['book']->id => ['quantity'=>$item['quantity'],'price'=>$item['price']]];
+            return [$item['book']->id => ['quantity'=>$item['quantity'],'price'=>$item['price'],'book_year'=>$item['book_year'],'credits'=>$item['credits']]];
         });
 
         //add orders item to order_book table

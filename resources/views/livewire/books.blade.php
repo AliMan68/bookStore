@@ -121,7 +121,7 @@
                                             </div>
                                             <a href="{{route('book.details',$book)}}" wire:navigate>
                                                 <div class="text">
-                                                    کتاب {{$book->title}}
+                                                     {{$book->title}}
                                                     اثر
                                                     {{$book->authors()->first()->title ?? 'نامشخص'}}
                                                 </div>
@@ -150,12 +150,15 @@
                                     </div>
                                 @endforeach
                             </div>
+                                {{$books->links()}}
 
                         </div>
                     </div>
                 </div>
-            </div>
 
+
+
+            </div>
             <div class="card col-md-3 d-none d-md-block" style="background: #f7f7f7;direction: rtl;text-align: right">
                 <h5 class="pr-1 mt-2">فیلتر :</h5>
                 <div class="card-body p-0">
@@ -236,6 +239,7 @@
             </div>
         </section>
     </form>
+
 </div>
 @script
 <script>

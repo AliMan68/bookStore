@@ -7,6 +7,10 @@
     "require": {
         "php": "^8.1",
         "guzzlehttp/guzzle": "^7.2",
+<<<<<<< HEAD
+=======
+        "ipe/smsir-php": "^1.0",
+>>>>>>> add some features bade on employee request
         "jantinnerezo/livewire-alert": "^3.0",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",

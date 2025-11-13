@@ -35,13 +35,13 @@ class AuthServiceProvider extends ServiceProvider
                 return $user->hasPermission($permission);
             });
         }
-//        foreach (Role::all() as $role){
-//            Gate::define($role->title,function ($user) use($role){
-//                if ($user->is_admin == 1)
-//                    return true;
-//                return $user->hasRole($role);
-//            });
-//        }
+        foreach (Role::all() as $role){
+            Gate::define($role->title,function ($user) use($role){
+                if ($user->is_admin == 1)
+                    return true;
+                return $user->hasRole($role);
+            });
+        }
 
 //        Gate::define('manage-orders',function ($user){
 //            //here we check if user has permission

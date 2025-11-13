@@ -121,19 +121,62 @@
                         </div>
                     </div>
                     <div class="divider"></div>
-                    <div class="col-md-4 col-sm-12">
+                    <div class="col-md-3 col-sm-12">
                         <div class="form-group">
                             <label for="bookNum">شمارگان-تیتراژ :</label>
                             <input type="text" id="bookNum" class="form-control " name="published"  value="{{old('published')}}" placeholder="اختیاری" >
                         </div>
                     </div>
-                    <div class="col-md-4 col-sm-12">
+                    <div class="col-md-3 col-sm-12">
                         <div class="form-group">
-                            <label for="bookTurn">نوبت چاپ :</label>
-                            <input type="text" id="bookTurn" class="form-control " name="credits"  value="{{old('credits')}}" placeholder="اختیاری" >
+                            <label for="book_year">سال چاپ :</label>
+                            <select name="book_year" id="book_year" class="form-control">
+                                <option value="1384">1384</option>
+                                <option value="1385">1385</option>
+                                <option value="1386">1386</option>
+                                <option value="1387">1387</option>
+                                <option value="1389">1389</option>
+                                <option value="1390">1390</option>
+                                <option value="1391">1391</option>
+                                <option value="1392">1392</option>
+                                <option value="1393">1393</option>
+                                <option value="1394">1394</option>
+                                <option value="1395">1395</option>
+                                <option value="1396">1396</option>
+                                <option value="1397">1397</option>
+                                <option value="1398">1398</option>
+                                <option value="1399">1399</option>
+                                <option value="1400">1400</option>
+                                <option value="1401">1401</option>
+                                <option value="1402">1402</option>
+                                <option value="1403">1403</option>
+                                <option value="1404">1404</option>
+                                <option value="1405">1405</option>
+                                <option value="1406">1406</option>
+                                <option value="1407">1407</option>
+                                <option value="1408">1408</option>
+                                <option value="1409">1409</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="col-md-4 col-sm-12">
+                    <div class="col-md-3 col-sm-12">
+                        <div class="form-group">
+                            <label for="bookTurn">نوبت چاپ :</label>
+                            <select name="credits" id="bookTurn" class="form-control">
+                                    <option value="اول">اول</option>
+                                    <option value="دوم">دوم</option>
+                                    <option value="سوم">سوم</option>
+                                    <option value="چهار">چهار</option>
+                                    <option value="پنجم">پنجم</option>
+                                    <option value="ششم">ششم</option>
+                                    <option value="هفتم">هفتم</option>
+                                    <option value="هشتم">هشتم</option>
+                                    <option value="نهم">نهم</option>
+                                    <option value="دهم">دهم</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-12">
                         <div class="form-group">
                             <label for="bookFrost">فروست انتشار :</label>
                             <input type="text" id="bookFrost" class="form-control " name="publication_frost"  value="{{old('publication_frost')}}" placeholder="اختیاری" >

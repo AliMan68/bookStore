@@ -49,6 +49,12 @@
                             <input type="text" id="email" class="form-control " name="email" value="{{$setting->email ?? old('email')}}" placeholder="">
                         </div>
                     </div>
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <label for="postPrice"> هزینه پست(تومان) :</label>
+                            <input type="number" required id="postPrice" class="form-control " name="post_price" value="{{$setting->post_price ?? old('post_price')}}" placeholder="عدد وارد نمایید">
+                        </div>
+                    </div>
                     <div class="col-md-3 m-auto col-sm-12">
                         <div class="form-group">
                             <button href="" class="btn btn-warning" id="" style="min-width: 150px;border-radius: 15px"  type="submit">

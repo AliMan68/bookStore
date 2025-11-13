@@ -41,12 +41,12 @@
                     <thead>
                     <tr>
                         <th scope="col">شماره سفارش</th>
-                        <th scope="col"> کاربر(شماره تماس)</th>
-                        <th scope="col" style="min-width: 80px;">تاریخ ثبت</th>
-                        <th scope="col">آدرس-کدپستی</th>
+                        <th scope="col"> کاربر</th>
+                        <th scope="col" style="min-width: 80px;">تاریخ </th>
+                        <th scope="col" style="min-width: 102px">آدرس-کدپستی</th>
                         <th scope="col">مبلغ سفارش(ریال)</th>
                         @if(request('type') == 'delivered')
-                        <th scope="col">کد رهگیری</th>
+                        <th scope="col">کد رهگیری پستی</th>
                         @endif
                         <th scope="col" style="min-width: 122px">عملیات</th>
                     </tr>
@@ -55,7 +55,8 @@
                     @foreach($orders as $order)
                         <tr class="">
                             <td scope="row">{{$order->id}}</td>
-                            <td scope="row">{{$order->user->name}} ({{$order->user->phone}})</td>
+                            <td scope="row" style="font-size:11px">@if($order->user != null) {{$order->user->name}} ({{$order->user->phone}})  @else  نامشخص@endif</td>
+{{--                            <td scope="row">{{$order->user->name}} ({{$order->user->phone}})</td>--}}
                             <td>
                                 {{jdate($order->created_at)->format('%d %B %Y')}}
                             </td>
@@ -72,9 +73,10 @@
                             <td style="font-size: 11px">{{$order->tracking_code ?? 'تحویل حضوری'}}</td>
                             @endif
                             <td>
-                                <button  data-toggle="modal" data-target="#orderDetails{{$order->id}}" class="btn btn-warning btn-sm" style="font-size: 10px!important;"> جزییات </button>
+                                <button  data-toggle="modal" data-target="#orderDetails{{$order->id}}" class="btn btn-warning btn-sm" style="font-size: 10px!important;"> <i class="fa fa-info-circle"></i> جزییات </button>
+                                <a href="{{route('admin.order.print',$order)}}" target="_blank" class="btn btn-dark btn-sm" style="font-size: 10px!important;"> <i class="fa fa-print"></i> پرینت فاکتور </a>
                                 @if(request('type') == 'completed')
-                                <button  data-toggle="modal" data-target="#orderSend{{$order->id}}" class="btn btn-primary btn-sm" style="font-size: 12px!important;"> ارسال </button>
+                                <button  data-toggle="modal" data-target="#orderSend{{$order->id}}" class="btn btn-primary btn-sm" style="font-size: 12px!important;">  <i class="fa fa-send-o"></i> ارسال </button>
                                 @endif
                             </td>
                         </tr>

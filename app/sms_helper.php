@@ -1,10 +1,12 @@
 <?php
 
 
+use App\GhasedakSms;
 use App\Helper\SmsIr\SmsIRClient;
-use App\Models\Config;
+use App\Models\Setting;
 use GuzzleHttp\Client;
 use Kavenegar\KavenegarApi;
+use Ipe\Sdk\Facades\SmsIr;
 
 function sendMessageRegister($user){
   try {
@@ -183,39 +185,49 @@ function sendGroupMessage($messages, $mobiles){
 //this is from our sms ir
 function sendResetPasswordCode($number, $code){
   try{
-    $template_code = MyCrypt::decrypt(Config::get(Config::KEY_SMS_IR_TEMPLATE_NUMBER)->value);
-    $result = smsIrFast(['VerificationCode' => $code], toNumber($template_code), toNumber($number));
+//    $template_code = MyCrypt::decrypt(Config::get(Config::KEY_SMS_IR_TEMPLATE_NUMBER)->value);
+      $template_code = 234915;
+//    $result = smsIrFast(['VerificationCode' => $code], toNumber($template_code), toNumber($number));
+      $result = smsIrFast([["name" => "CODE", "value" => $code]], toNumber($template_code), toNumber($number));
   }catch (Exception $e){}
 }
+
+//function sendRegisterPasswordCode($number, $code){
+//  try{
+//    $template_code = MyCrypt::decrypt(Config::get(Config::KEY_SMS_IR_TEMPLATE_NUMBER)->value);
+//    $result = smsIrFast(['VerificationCode' => $code], toNumber($template_code), toNumber($number));
+//  }catch (Exception $e){}
+//}
+
 
 function sendRegisterPasswordCode($number, $code){
-  try{
-    $template_code = MyCrypt::decrypt(Config::get(Config::KEY_SMS_IR_TEMPLATE_NUMBER)->value);
-    $result = smsIrFast(['VerificationCode' => $code], toNumber($template_code), toNumber($number));
-  }catch (Exception $e){}
+    try{
+//        $template_code = MyCrypt::decrypt(Setting::get(Setting::KEY_SMS_IR_TEMPLATE_NUMBER)->value);
+        $template_code = 234915;
+        $result = smsIrFast([["name" => "CODE", "value" => $code]], toNumber($template_code), toNumber($number));
+//        $result = smsIrFast(['VerificationCode' => $code], toNumber($template_code), toNumber($number));
+    }catch (Exception $e){}
 }
-
-
-
-
-
-
-
-
 
 
 
 
 function smsIrFast(array $parameters, $template_id, $number){
-  $params = [];
-  foreach ($parameters as $key => $value) {
-    $params[] = ['Parameter' => $key, 'ParameterValue' => $value];
-  }
-  $client = new Client();
-  $body   = ['ParameterArray' => $params,'TemplateId' => $template_id,'Mobile' => $number];
-  $result = $client->post('https://ws.sms.ir/api/UltraFastSend',['json'=>$body,'headers'=>['x-sms-ir-secure-token'=>smsIrGetToken()],'connect_timeout'=>30]);
-  return json_decode($result->getBody(),true);
+    $response = SmsIr::verifySend($number, $template_id, $parameters);
+    return $response;
 }
+
+//
+//function smsIrFast(array $parameters, $template_id, $number){
+//  $params = [];
+//  foreach ($parameters as $key => $value) {
+//    $params[] = ['Parameter' => $key, 'ParameterValue' => $value];
+//  }
+//  $client = new Client();
+//  $body   = ['ParameterArray' => $params,'TemplateId' => $template_id,'Mobile' => $number];
+//  $result = $client->post('https://ws.sms.ir/api/UltraFastSend',['json'=>$body,'headers'=>['x-sms-ir-secure-token'=>smsIrGetToken()],'connect_timeout'=>30]);
+//  return json_decode($result->getBody(),true);
+//}
 
 
 function smsIrGetToken(){
